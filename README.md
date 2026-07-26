@@ -6,6 +6,8 @@ credit** — built to train a risk model that a chatbot can actually explain.
 Everything here is synthetic. No real customer data was used, and none is
 required to run it.
 
+Released under the [MIT License](LICENSE) — use it, fork it, ship it.
+
 > Code, schema and documentation are in English. The **decision rationales
 > stored in the database are in French**, because that is what a French credit
 > decision letter is, and French regulatory terms (FICP, FCC, HCSF, TAEG, taux
@@ -292,3 +294,16 @@ constrained language model that puts it into words and invents nothing.
 - **No automated test suite.** Verification runs through `checks.sql` and the
   audits printed by `train.py`. If the generator changes, nothing will
   automatically catch a distribution regression.
+
+---
+
+## License
+
+MIT. Do what you like with it; just keep the copyright notice.
+
+The dataset it generates is synthetic and carries no personal data, so it is
+free of GDPR constraints. That is a property of *this* generator, not of the
+pipeline: point the same code at real applications and every obligation applies
+again — lawful basis, minimisation, the right to an explanation for automated
+decisions, and the high-risk classification that the EU AI Act attaches to
+creditworthiness assessment.
