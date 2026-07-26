@@ -22,7 +22,7 @@ def connect(path: Path | str = DB_PATH) -> sqlite3.Connection:
 
 
 def initialise(path: Path | str = DB_PATH, *, overwrite: bool = False) -> sqlite3.Connection:
-    """Create the database from schema.sql and seed_reference_data.sql."""
+    """Create the database from sql/schema.sql and sql/reference_data.sql."""
     path = Path(path)
     if path.exists():
         if not overwrite:
@@ -30,7 +30,7 @@ def initialise(path: Path | str = DB_PATH, *, overwrite: bool = False) -> sqlite
         path.unlink()
 
     conn = connect(path)
-    conn.executescript((ROOT / "schema.sql").read_text(encoding="utf-8"))
-    conn.executescript((ROOT / "seed_reference_data.sql").read_text(encoding="utf-8"))
+    conn.executescript((ROOT / "sql" / "schema.sql").read_text(encoding="utf-8"))
+    conn.executescript((ROOT / "sql" / "reference_data.sql").read_text(encoding="utf-8"))
     conn.commit()
     return conn

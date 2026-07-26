@@ -21,13 +21,13 @@ Released under the [MIT License](LICENSE) — use it, fork it, ship it.
 pip install -r requirements.txt
 
 python3 populate.py 40000 --rebuild   # build and fill credit.db  (~6 s)
-sqlite3 credit.db < checks.sql          # coherence checks
+sqlite3 credit.db < sql/checks.sql          # coherence checks
 python3 export_dataset.py               # dictionary-driven CSV export
 python3 train.py                        # train, calibrate, serialise
 python3 reject_inference.py             # what selection bias costs
 
 uvicorn api:app --port 8000             # scoring service
-python3 examples.py                     # ten worked applications
+python3 demo_applications.py                     # ten worked applications
 open http://localhost:8000/             # bilingual console (EN / FR)
 ```
 
@@ -40,9 +40,9 @@ along with `export/`, `models/`, `examples/` and `rationales/`.
 
 | File | Role |
 |---|---|
-| `schema.sql` | 18 tables, constraints, 3 triggers, views `v_dataset` and `v_class_balance` |
-| `seed_reference_data.sql` | 7 reference tables + the 104 variable-dictionary entries |
-| `checks.sql` | 8 coherence checks, 6 of them blocking |
+| `sql/schema.sql` | 18 tables, constraints, 3 triggers, views `v_dataset` and `v_class_balance` |
+| `sql/reference_data.sql` | 7 reference tables + the 104 variable-dictionary entries |
+| `sql/checks.sql` | 8 coherence checks, 6 of them blocking |
 | `creditrisk/indicators.py` | debt-to-income, residual income, consumption units, payment shock |
 | `creditrisk/generator.py` | application draws, decision policy, default model |
 | `creditrisk/rationale.py` | template rationales, driven by the coded reasons |
@@ -53,7 +53,7 @@ along with `export/`, `models/`, `examples/` and `rationales/`.
 | `reject_inference.py` | measures selection bias against counterfactual ground truth |
 | `llm_rationales.py` | export/load of LLM-written rationales |
 | `api.py` | HTTP scoring service (FastAPI) |
-| `examples.py` | ten demonstration applications |
+| `demo_applications.py` | ten demonstration applications |
 | `console.html` | bilingual try-it console, served by the API |
 
 ---
@@ -114,7 +114,7 @@ dictionary entry **fails the export** instead of silently entering `X`. That is
 what stops `risk_score` or `approved_amount` from becoming a model input by
 accident.
 
-If you add a column to the view, add its row to `seed_reference_data.sql`.
+If you add a column to the view, add its row to `sql/reference_data.sql`.
 
 ---
 
@@ -291,7 +291,7 @@ constrained language model that puts it into words and invents nothing.
 - **The LLM rationales are distillation.** The tabular side is solid; the
   language side is capped by the quality of the generation prompt. Having a
   credit analyst review a core set of them is where the best return lies.
-- **No automated test suite.** Verification runs through `checks.sql` and the
+- **No automated test suite.** Verification runs through `sql/checks.sql` and the
   audits printed by `train.py`. If the generator changes, nothing will
   automatically catch a distribution regression.
 

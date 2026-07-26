@@ -29,18 +29,18 @@ from pathlib import Path
 import joblib
 import numpy as np
 import pandas as pd
-from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import HistGradientBoostingClassifier
-from sklearn.impute import SimpleImputer
 from sklearn.inspection import permutation_importance
 from sklearn.isotonic import IsotonicRegression
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import (average_precision_score, brier_score_loss,
-                             classification_report, confusion_matrix, f1_score,
-                             roc_auc_score, roc_curve)
+from sklearn.metrics import (brier_score_loss, classification_report,
+                             confusion_matrix, f1_score, roc_auc_score)
 from sklearn.model_selection import cross_val_predict
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
+
+from creditrisk.evaluation import bias_audit, metrics, score_bands
+from creditrisk.features import (SCORECARD_VARIABLES, SIGN_THRESHOLD,
+                                 audit_signs, preprocessor)
 
 EXPORT = Path("export")
 MODELS = Path("models")
@@ -63,117 +63,9 @@ def load_protected(split: str) -> pd.DataFrame:
     return pd.read_csv(EXPORT / f"protected_{split}.csv")
 
 
-def preprocessor(X: pd.DataFrame) -> ColumnTransformer:
-    numeric = X.select_dtypes(include=np.number).columns.tolist()
-    categorical = [c for c in X.columns if c not in numeric]
-    return ColumnTransformer([
-        ("num", Pipeline([("imp", SimpleImputer(strategy="median")),
-                          ("scale", StandardScaler())]), numeric),
-        ("cat", Pipeline([("imp", SimpleImputer(strategy="most_frequent")),
-                          ("enc", OneHotEncoder(handle_unknown="ignore",
-                                                min_frequency=20,
-                                                sparse_output=False))]), categorical)])
-
-
-# --------------------------------------------------------------------------
-# Metrics
-# --------------------------------------------------------------------------
-
-def ks_statistic(y, p) -> float:
-    """Kolmogorov-Smirnov: largest gap between good and bad payers."""
-    fpr, tpr, _ = roc_curve(y, p)
-    return float(np.max(tpr - fpr))
-
-
-def metrics(y, p) -> dict:
-    auc = roc_auc_score(y, p)
-    return {
-        "auc": round(float(auc), 4),
-        "gini": round(float(2 * auc - 1), 4),          # banking standard
-        "ks": round(ks_statistic(y, p), 4),
-        "average_precision": round(float(average_precision_score(y, p)), 4),
-        "brier": round(float(brier_score_loss(y, p)), 5),
-        "base_rate": round(float(np.mean(y)), 4),
-    }
-
-
-def score_bands(y, p, n_bands: int = 10) -> pd.DataFrame:
-    """Observed default rate per score band — the deliverable underwriters read."""
-    d = pd.DataFrame({"p": p, "y": np.asarray(y)})
-    d["band"] = pd.qcut(d.p.rank(method="first"), n_bands,
-                        labels=[f"D{i}" for i in range(1, n_bands + 1)])
-    g = d.groupby("band", observed=True).agg(
-        n=("y", "size"), defaults=("y", "sum"),
-        mean_pd=("p", "mean"), observed_rate=("y", "mean")).reset_index()
-    g["gap"] = (g.mean_pd - g.observed_rate).abs()
-    return g.round(4)
-
-
 # --------------------------------------------------------------------------
 # Default-risk model
 # --------------------------------------------------------------------------
-
-# Scorecard variable set: one representative per economic family. RATIOS take
-# precedence over their components — keeping `residual_income_per_cu` alongside
-# the income, instalments, rent and household size that build it flips the sign
-# of the ratio, and a scorecard where residual income "worsens" risk cannot
-# motivate a decline.
-SCORECARD_VARIABLES = [
-    # repayment capacity
-    "dti_after_pct", "above_hcsf_threshold", "residual_income_per_cu",
-    "savings_months_of_expenses", "variable_income_share", "down_payment_ratio",
-    "payment_shock",
-    # the operation
-    "requested_amount", "term_months", "apr", "has_co_borrower", "insurance_taken",
-    # existing exposure
-    "existing_loans", "revolving_loans", "loan_incidents_12m", "loans_repaid_clean",
-    # account behaviour
-    "days_overdrawn_12m", "rejected_debits_12m", "ficp_flagged", "fcc_flagged",
-    "salary_domiciled", "max_overdraft_used", "products_held",
-    # stability
-    "months_in_job", "relationship_months", "months_at_address",
-    "in_probation_period", "undocumented_income_lines",
-    # categorical
-    "loan_type", "contract_stability", "contract_type", "housing_status",
-    "channel", "occupation", "area_type",
-]
-
-# Direction the business expects. A mismatch is not fatal in itself, but it must
-# be seen: it is the usual symptom of residual collinearity.
-EXPECTED_SIGNS = {
-    "protective": ["residual_income_per_cu", "savings_months_of_expenses",
-                   "loans_repaid_clean", "months_in_job", "relationship_months",
-                   "months_at_address", "salary_domiciled", "has_co_borrower",
-                   "down_payment_ratio", "products_held"],
-    "adverse": ["dti_after_pct", "above_hcsf_threshold", "payment_shock",
-                "variable_income_share", "days_overdrawn_12m", "rejected_debits_12m",
-                "ficp_flagged", "fcc_flagged", "revolving_loans", "loan_incidents_12m",
-                "in_probation_period", "max_overdraft_used", "undocumented_income_lines"],
-}
-
-# Below this, a coefficient's sign means nothing. The variables that carry the
-# model have standardised coefficients of 0.3 to 0.6; under 0.05 the effect is
-# worth less than 5% of odds ratio per standard deviation — economically
-# negligible, and unstable in sign from one sample to the next. A stricter
-# threshold (0.01) fails the audit on noise and discards good models.
-SIGN_THRESHOLD = 0.05
-
-
-def audit_signs(model: Pipeline) -> list[tuple[str, float, str]]:
-    clf = model.named_steps["clf"]
-    if not hasattr(clf, "coef_"):
-        return []
-    names = [n.split("__", 1)[-1] for n in model.named_steps["pre"].get_feature_names_out()]
-    coef = pd.Series(clf.coef_[0], index=names)
-    anomalies = []
-    for v in EXPECTED_SIGNS["protective"]:
-        if v in coef and coef[v] > SIGN_THRESHOLD:
-            anomalies.append((v, float(coef[v]), "protective"))
-    for v in EXPECTED_SIGNS["adverse"]:
-        if v in coef and coef[v] < -SIGN_THRESHOLD:
-            anomalies.append((v, float(coef[v]), "adverse"))
-    return anomalies
-
 
 def train_default_risk() -> dict:
     print("=" * 74)
@@ -367,26 +259,6 @@ def train_default_risk() -> dict:
             "test_raw": m_raw, "test_retained": m_final,
             "mean_calibration_gap": round(float(bands.gap.mean()), 4),
             "domain": domain}
-
-
-def bias_audit(protected: pd.DataFrame, proba: np.ndarray, y: pd.Series) -> None:
-    """Does the model err more on some protected groups than others?
-
-    Protected attributes are excluded from the features, which does not stop the
-    model reconstructing them by correlation. Only an audit shows it.
-    """
-    print("\n  Bias audit — mean score and observed default rate by group")
-    print(f"  {'attribute':<20} {'group':<16} {'n':>6} {'mean score':>11} {'observed':>10}")
-    for column in protected.columns:
-        values = protected[column]
-        groups = (pd.qcut(values, 4, duplicates="drop")
-                  if pd.api.types.is_numeric_dtype(values) else values)
-        for group, idx in pd.Series(range(len(y))).groupby(groups.values):
-            if len(idx) < 30:
-                continue
-            print(f"  {column:<20} {str(group):<16} {len(idx):>6} "
-                  f"{proba[idx].mean():>11.3f} {y.iloc[idx].mean():>10.3f}")
-    print("\n  A score gap not backed by a gap in observed default is a bias.")
 
 
 # --------------------------------------------------------------------------

@@ -30,7 +30,8 @@ import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 
-from train import SCORECARD_VARIABLES, metrics, preprocessor, score_bands
+from creditrisk.evaluation import metrics, score_bands
+from creditrisk.features import SCORECARD_VARIABLES, preprocessor
 
 EXPORT = Path("export")
 KEY = "application_reference"

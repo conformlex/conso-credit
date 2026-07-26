@@ -2,7 +2,7 @@
 """Ten demonstration applications for the scoring service.
 
     uvicorn api:app --port 8000 &
-    python3 examples.py
+    python3 demo_applications.py
 
 Writes the ten payloads to `examples/` — reusable as-is with curl — then sends
 them to the service and prints the results.
