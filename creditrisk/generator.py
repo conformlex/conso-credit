@@ -498,7 +498,7 @@ def _decide(ind, behaviour, employment, application, reasons, risk, rng) -> dict
                                         ("approved_with_conditions", 40), ("declined", 15)])
 
     # A deferral means a document is missing, not a coin flip: a class with no
-    # observable cause is unlearnable, and a chatbot trained on it would defer
+    # observable cause is unlearnable, and a model trained on it would defer
     # for no reason. It is therefore anchored on undocumented income or on a
     # relationship too new to assess.
     if "UNDOCUMENTED_INCOME" in reasons and rng.random() < 0.45:

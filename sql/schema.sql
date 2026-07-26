@@ -1,6 +1,6 @@
 -- =====================================================================
 -- French consumer-credit application database (synthetic data)
--- Purpose : train a credit-risk model that a chatbot can explain
+-- Purpose : train a credit-risk model whose every decision can be explained
 -- Engine  : SQLite
 -- =====================================================================
 -- Conventions:
@@ -294,7 +294,8 @@ CREATE TABLE decision (
     risk_score          INTEGER NOT NULL CHECK (risk_score BETWEEN 0 AND 100),
     risk_grade          TEXT NOT NULL CHECK (risk_grade IN ('A', 'B', 'C', 'D', 'E')),
     conditions          TEXT,
-    -- Free-text explanation, in French: this is the chatbot's training signal.
+    -- Free-text explanation, in French: the supervision signal for an
+    -- explanation layer built on top of the model.
     rationale           TEXT NOT NULL,
     -- 'llm' means the text was written by a language model. A training set
     -- where you no longer know who wrote what cannot be audited.
@@ -396,7 +397,7 @@ END;
 -- Drives the export: the ML script never runs SELECT *, it asks the
 -- dictionary for columns whose role is 'feature'. Any v_dataset column
 -- missing from here fails the export rather than silently entering X.
--- The descriptions double as context for the chatbot's explanations.
+-- The descriptions double as context when a decision is put into words.
 
 CREATE TABLE variable_dictionary (
     column_name TEXT PRIMARY KEY,

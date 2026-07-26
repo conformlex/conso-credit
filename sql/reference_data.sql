@@ -250,7 +250,7 @@ INSERT INTO variable_dictionary (column_name, label, data_type, role, categories
 ('approved_amount',             'Approved amount',             'numeric',    'target', NULL, 'EUR', 'May differ from the amount requested (counter-offer). Null when declined.'),
 ('approved_term_months',        'Approved term',               'integer',    'target', NULL, 'months', 'May differ from the term requested. Null when declined.'),
 ('conditions',                  'Conditions attached',         'text',       'target', NULL, NULL, 'Populated only on a conditional approval.'),
-('rationale',                   'Written rationale',           'text',       'target', NULL, NULL, 'Free-text explanation of the decision, in French: the chatbot training signal.'),
+('rationale',                   'Written rationale',           'text',       'target', NULL, NULL, 'Free-text explanation of the decision, in French: supervision signal for an explanation layer.'),
 ('reasons',                     'Coded reasons',               'text',       'target', NULL, NULL, 'Reason codes joined by |. Structured counterpart of the rationale.'),
 ('adverse_reasons',             'Adverse reason count',        'integer',    'target', NULL, 'reasons', 'Number of reasons with adverse polarity.'),
 ('favourable_reasons',          'Favourable reason count',     'integer',    'target', NULL, 'reasons', 'Number of reasons with favourable polarity.'),

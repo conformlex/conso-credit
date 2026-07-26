@@ -1,7 +1,8 @@
 # conso-credit
 
 A synthetic dataset, a scorecard and a scoring service for **French consumer
-credit** — built to train a risk model that a chatbot can actually explain.
+credit** — every decision reproducible, and explainable down to the
+coefficient.
 
 Everything here is synthetic. No real customer data was used, and none is
 required to run it.
@@ -266,7 +267,7 @@ Two origins, traced by `decision.decided_by`:
 - `rule_engine` — deterministic template driven by the coded reasons. Covers the
   volume; text and reasons cannot disagree.
 - `llm` — written by a language model from the application summary. More natural
-  register, and the intended training signal for a chatbot. **Audit it**: the
+  register, and the supervision material for an explanation layer. **Audit it**: the
   model you train will imitate that register, not banking expertise. This is
   distillation, and it is worth being explicit about.
 
@@ -289,19 +290,20 @@ those batches.
 
 ---
 
-## Is a chatbot the right interface?
+## Where a language model belongs
 
-Not for the decision itself. A credit application is a form, not a conversation:
-the variables are known in advance and arrive from the origination system.
-Decisions must be reproducible and auditable, and credit scoring is classified as
-high-risk under the EU AI Act. A language model adds no predictive value — the PD
-comes from 35 coefficients — and adds one real risk: stating a figure that
-contradicts the model.
+Not in the decision. A credit application is a form, not a conversation: the
+variables are known in advance and arrive from the origination system. Decisions
+must be reproducible and auditable, and credit scoring is high-risk under the EU
+AI Act. A language model adds no predictive value here — the PD comes from 35
+coefficients — and adds one real risk: stating a figure that contradicts the
+model.
 
-Where conversation genuinely wins is around the decision: the *what would have to
-change* question, pre-application simulation, and writing the decline letter. The
-architecture that follows is a deterministic model that computes, and a
-constrained language model that puts it into words and invents nothing.
+It belongs around the decision: the *what would have to change* question,
+pre-application simulation, the decline letter. That split is what this
+repository implements. The model computes and returns figures; `/simulate`
+answers the counterfactual without generating a single number; the `rationale`
+column holds the words, and nothing in the scoring path writes them.
 
 ---
 
