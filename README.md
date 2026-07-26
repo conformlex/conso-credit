@@ -42,9 +42,9 @@ same seed reproduces the dataset row for row. That is cheaper than shipping an
 80 MB binary nobody can diff.
 
 `rationales/` is the exception and **is versioned**. Those batches were written
-by a language model; they cannot be recomputed from a seed, and they are the one
-genuinely irreplaceable artefact here. Restoring a database in full therefore
-takes two commands, not one:
+by a language model: they are input data, not computed data, and no seed
+reproduces them. They are the one irreplaceable artefact in the repository.
+Restoring a database in full is therefore two commands:
 
 ```bash
 python3 populate.py 40000 --rebuild   # seed -> identical applications
@@ -146,15 +146,17 @@ the full 74 variables is kept as a challenger.
 
 Three modelling decisions worth knowing before you touch the code:
 
-**Ratios take precedence over their components.** Exporting both
+**Ratios take precedence over their components.** The scorecard uses 35 of the
+74 exported variables, one per economic family. Feeding a model both
 `residual_income_per_cu` and the income, instalments, rent and household size
-that build it inverts the sign of the ratio: the model then learns that *high*
-residual income increases risk. With all 74 variables, 9 coefficients out of 26
-pointed against business direction. The reduced set has none, for a better
-validation AUC. `audit_signs()` runs that check on every training run, and it is
-a **hard constraint** — a linear candidate with incoherent signs is dropped
-whatever its AUC. A scorecard whose signs are wrong cannot motivate a decline,
-and French lenders must be able to.
+that build it inverts the sign of the ratio, so the model learns that *high*
+residual income increases risk. `creditrisk/features.py` holds the retained set
+and the direction each variable is expected to push.
+
+`audit_signs()` checks those directions on every training run, and it is a **hard
+constraint**: a linear candidate whose signs contradict the business is dropped
+whatever its AUC. A scorecard with inverted signs cannot motivate a decline, and
+French lenders must be able to.
 
 **Logistic regression is kept unless gradient boosting gains 0.02 AUC.** The
 explanation of a decline has to be exact, not approximate: with a linear model a
@@ -162,12 +164,15 @@ variable's contribution is its coefficient times its standardised value. That is
 what `predict.py` and the API return.
 
 **Calibration is selected, not imposed.** The calibrator is fitted on out-of-fold
-training predictions (~1,300 events) and the choice between isotonic, Platt and
-*none* is made on validation Brier score. Fitted on the ~300 validation events,
-isotonic regression overfitted and degraded what it was meant to fix; it is also
-a step function, which flattens granularity to the point of giving three very
-different applications the same PD. It is now applied only if it improves Brier
-by at least 1% relative.
+training predictions (~1,300 events), and the choice between isotonic, Platt and
+*none* is made on validation Brier score. A calibrator is applied only when it
+improves Brier by at least 1% relative.
+
+Both guards earn their place. Fitting on the few hundred validation events
+overfits, so the calibrator would degrade what it exists to correct. And
+isotonic regression is a step function: applied without a materiality threshold
+it flattens granularity, to the point of assigning the same PD to visibly
+different applications.
 
 ---
 
@@ -278,9 +283,9 @@ rebuild, so loading a stale batch would silently attach rationales to the wrong
 applications.
 
 `rationales/` is the only generated directory under version control, because a
-language model's output is not reproducible from a seed. Rebuild the database
-and the template rationales come back identically; the LLM ones come back only
-if the batches are still there.
+language model's output is not reproducible from a seed. Rebuilding the database
+restores the template rationales identically; the LLM ones return only from
+those batches.
 
 ---
 

@@ -53,11 +53,11 @@ EXPECTED_SIGNS = {
                 "in_probation_period", "max_overdraft_used", "undocumented_income_lines"],
 }
 
-# Below this, a coefficient's sign means nothing. The variables that carry the
-# model have standardised coefficients of 0.3 to 0.6; under 0.05 the effect is
-# worth less than 5% of odds ratio per standard deviation — economically
-# negligible, and unstable in sign from one sample to the next. A stricter
-# threshold (0.01) fails the audit on noise and discards good models.
+# Materiality threshold for the sign audit. The variables that carry the model
+# have standardised coefficients of 0.3 to 0.6; under 0.05 the effect is worth
+# less than 5% of odds ratio per standard deviation — economically negligible,
+# and unstable in sign from one sample to the next. Auditing below that level
+# reports noise and rejects sound models.
 SIGN_THRESHOLD = 0.05
 
 

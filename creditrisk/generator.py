@@ -260,9 +260,8 @@ def _draw_expenses(rng: random.Random, household: dict, weighted_income: float) 
                          "counted_in_dti": 1})
 
     # An expense ending within a few months is declared on the file but left out
-    # of the ratio. indicators.compute() has always handled that case; no data
-    # exercised it, so the branch was never tested. Rent is excluded: it does
-    # not expire.
+    # of the debt-to-income ratio, which is what `counted_in_dti` encodes. Rent
+    # is excluded from the draw: it does not expire.
     for e in expenses:
         if e["expense_type_code"] != "RENT" and rng.random() < 0.12:
             e["counted_in_dti"] = 0
