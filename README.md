@@ -31,8 +31,25 @@ python3 demo_applications.py                     # ten worked applications
 open http://localhost:8000/             # bilingual console (EN / FR)
 ```
 
-`credit.db` is about 80 MB and rebuilds in six seconds, so it is git-ignored,
-along with `export/`, `models/`, `examples/` and `rationales/`.
+### What is versioned, and what is not
+
+`credit.db` is about 80 MB and rebuilds in six seconds, so it is git-ignored —
+together with `export/`, `models/` and `examples/`, all of which are computed.
+
+The **seed is the dump**. `generation_metadata` records the seed, the volume and
+the default intensity used, and generation is deterministic: rebuilding with the
+same seed reproduces the dataset row for row. That is cheaper than shipping an
+80 MB binary nobody can diff.
+
+`rationales/` is the exception and **is versioned**. Those batches were written
+by a language model; they cannot be recomputed from a seed, and they are the one
+genuinely irreplaceable artefact here. Restoring a database in full therefore
+takes two commands, not one:
+
+```bash
+python3 populate.py 40000 --rebuild   # seed -> identical applications
+python3 llm_rationales.py load        # versioned batches -> identical rationales
+```
 
 ---
 
@@ -259,6 +276,11 @@ contradicts the decision it explains, and **files older than their input batch**
 That last guard matters: references (`APP-YYYY-NNNNNN`) are reassigned on every
 rebuild, so loading a stale batch would silently attach rationales to the wrong
 applications.
+
+`rationales/` is the only generated directory under version control, because a
+language model's output is not reproducible from a seed. Rebuild the database
+and the template rationales come back identically; the LLM ones come back only
+if the batches are still there.
 
 ---
 

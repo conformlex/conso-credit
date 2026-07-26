@@ -1,0 +1,2042 @@
+[
+ {
+  "reference": "APP-2022-000252",
+  "operation": {
+   "loan_type": "AUTO",
+   "requested_amount_eur": 5000,
+   "term_months": 26,
+   "apr_pct": 5.85,
+   "monthly_payment_eur": 206.14,
+   "down_payment_eur": 1481.95,
+   "channel": "point_of_sale"
+  },
+  "borrower": {
+   "contract_fr": "CDI",
+   "months_in_job": 6,
+   "in_probation_period": false,
+   "occupation": "MANUAL_WORKER",
+   "has_co_borrower": false,
+   "household_size": 2,
+   "dependent_children": 0,
+   "housing_status": "TENANT",
+   "relationship_months": 359
+  },
+  "financials": {
+   "weighted_income_eur": 1469.39,
+   "counted_expenses_eur": 490.2,
+   "existing_loans": 0,
+   "existing_loan_payments_eur": 0,
+   "dti_before_pct": 33.36,
+   "dti_after_pct": 47.39,
+   "residual_income_per_cu_eur": 515.37,
+   "liquid_savings_eur": 2901.4,
+   "savings_months_of_expenses": 4.17
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 42,
+   "rejected_debits_12m": 1,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 0,
+   "salary_domiciled": true
+  },
+  "decision": {
+   "result": "approved_with_conditions",
+   "approved_amount_eur": 2876.51,
+   "approved_term_months": 20,
+   "conditions": "montant ramene a 2877 EUR ; duree ramenee a 20 mois",
+   "risk_grade": "C"
+  },
+  "reasons": [
+   {
+    "code": "EXCESSIVE_DTI",
+    "label": "Debt-to-income ratio above the threshold",
+    "polarity": "adverse"
+   },
+   {
+    "code": "LONG_RELATIONSHIP",
+    "label": "Long-standing banking relationship",
+    "polarity": "favourable"
+   },
+   {
+    "code": "LOW_RESIDUAL_INCOME",
+    "label": "Residual income per consumption unit too low",
+    "polarity": "adverse"
+   },
+   {
+    "code": "MEANINGFUL_DOWN_PAYMENT",
+    "label": "Meaningful down payment",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SALARY_DOMICILED",
+    "label": "Salary paid into an account with the lender",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SHORT_JOB_TENURE",
+    "label": "Insufficient time in current job",
+    "polarity": "adverse"
+   },
+   {
+    "code": "SOLID_SAVINGS",
+    "label": "Sufficient precautionary savings",
+    "polarity": "favourable"
+   }
+  ],
+  "_stratum": "observed_default"
+ },
+ {
+  "reference": "APP-2022-000069",
+  "operation": {
+   "loan_type": "HOME_IMPROVEMENT",
+   "requested_amount_eur": 16772.94,
+   "term_months": 44,
+   "apr_pct": 6.81,
+   "monthly_payment_eur": 425.08,
+   "down_payment_eur": 1435.96,
+   "channel": "broker"
+  },
+  "borrower": {
+   "contract_fr": "CDI",
+   "months_in_job": 38,
+   "in_probation_period": false,
+   "occupation": "INTERMEDIATE",
+   "has_co_borrower": false,
+   "household_size": 2,
+   "dependent_children": 1,
+   "housing_status": "TENANT",
+   "relationship_months": 71
+  },
+  "financials": {
+   "weighted_income_eur": 2297.34,
+   "counted_expenses_eur": 724.71,
+   "existing_loans": 3,
+   "existing_loan_payments_eur": 435.08,
+   "dti_before_pct": 50.48,
+   "dti_after_pct": 68.99,
+   "residual_income_per_cu_eur": 474.98,
+   "liquid_savings_eur": 4047.71,
+   "savings_months_of_expenses": 2.55
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 0,
+   "rejected_debits_12m": 0,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 2,
+   "salary_domiciled": true
+  },
+  "decision": {
+   "result": "declined",
+   "approved_amount_eur": null,
+   "approved_term_months": null,
+   "conditions": null,
+   "risk_grade": "D"
+  },
+  "reasons": [
+   {
+    "code": "CLEAN_HISTORY",
+    "label": "No incident over the observed period",
+    "polarity": "favourable"
+   },
+   {
+    "code": "EXCESSIVE_DTI",
+    "label": "Debt-to-income ratio above the threshold",
+    "polarity": "adverse"
+   },
+   {
+    "code": "LOANS_REPAID_CLEAN",
+    "label": "Previous loans repaid without incident",
+    "polarity": "favourable"
+   },
+   {
+    "code": "LOW_RESIDUAL_INCOME",
+    "label": "Residual income per consumption unit too low",
+    "polarity": "adverse"
+   },
+   {
+    "code": "SALARY_DOMICILED",
+    "label": "Salary paid into an account with the lender",
+    "polarity": "favourable"
+   },
+   {
+    "code": "STABLE_EMPLOYMENT",
+    "label": "Stable employment situation",
+    "polarity": "favourable"
+   }
+  ],
+  "_stratum": "declined"
+ },
+ {
+  "reference": "APP-2022-000074",
+  "operation": {
+   "loan_type": "LEASE_TO_OWN",
+   "requested_amount_eur": 8000,
+   "term_months": 50,
+   "apr_pct": 7.04,
+   "monthly_payment_eur": 186.73,
+   "down_payment_eur": 1425.73,
+   "channel": "branch"
+  },
+  "borrower": {
+   "contract_fr": "CDI",
+   "months_in_job": 6,
+   "in_probation_period": false,
+   "occupation": "INTERMEDIATE",
+   "has_co_borrower": false,
+   "household_size": 1,
+   "dependent_children": 0,
+   "housing_status": "TENANT",
+   "relationship_months": 22
+  },
+  "financials": {
+   "weighted_income_eur": 2530.66,
+   "counted_expenses_eur": 751.63,
+   "existing_loans": 0,
+   "existing_loan_payments_eur": 0,
+   "dti_before_pct": 29.7,
+   "dti_after_pct": 37.08,
+   "residual_income_per_cu_eur": 1592.3,
+   "liquid_savings_eur": 1922.4,
+   "savings_months_of_expenses": 2.05
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 51,
+   "rejected_debits_12m": 0,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 2,
+   "salary_domiciled": false
+  },
+  "decision": {
+   "result": "declined",
+   "approved_amount_eur": null,
+   "approved_term_months": null,
+   "conditions": null,
+   "risk_grade": "A"
+  },
+  "reasons": [
+   {
+    "code": "AMPLE_RESIDUAL_INCOME",
+    "label": "Ample residual income",
+    "polarity": "favourable"
+   },
+   {
+    "code": "EXCESSIVE_DTI",
+    "label": "Debt-to-income ratio above the threshold",
+    "polarity": "adverse"
+   },
+   {
+    "code": "LOANS_REPAID_CLEAN",
+    "label": "Previous loans repaid without incident",
+    "polarity": "favourable"
+   },
+   {
+    "code": "MEANINGFUL_DOWN_PAYMENT",
+    "label": "Meaningful down payment",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SHORT_JOB_TENURE",
+    "label": "Insufficient time in current job",
+    "polarity": "adverse"
+   }
+  ],
+  "_stratum": "declined"
+ },
+ {
+  "reference": "APP-2024-000737",
+  "operation": {
+   "loan_type": "LEASE_TO_OWN",
+   "requested_amount_eur": 16987.25,
+   "term_months": 53,
+   "apr_pct": 7.12,
+   "monthly_payment_eur": 369.58,
+   "down_payment_eur": 0,
+   "channel": "point_of_sale"
+  },
+  "borrower": {
+   "contract_fr": "interim",
+   "months_in_job": 2,
+   "in_probation_period": false,
+   "occupation": "MANUAL_WORKER",
+   "has_co_borrower": false,
+   "household_size": 3,
+   "dependent_children": 1,
+   "housing_status": "OWNER_OUTRIGHT",
+   "relationship_months": 79
+  },
+  "financials": {
+   "weighted_income_eur": 2028.77,
+   "counted_expenses_eur": 0,
+   "existing_loans": 2,
+   "existing_loan_payments_eur": 212.78,
+   "dti_before_pct": 10.49,
+   "dti_after_pct": 28.71,
+   "residual_income_per_cu_eur": 723.21,
+   "liquid_savings_eur": 8123.57,
+   "savings_months_of_expenses": 13.95
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 95,
+   "rejected_debits_12m": 0,
+   "ficp_flagged": true,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 3,
+   "salary_domiciled": true
+  },
+  "decision": {
+   "result": "declined",
+   "approved_amount_eur": null,
+   "approved_term_months": null,
+   "conditions": null,
+   "risk_grade": "A"
+  },
+  "reasons": [
+   {
+    "code": "FICP_FLAG",
+    "label": "Registered on the FICP incident file",
+    "polarity": "adverse"
+   },
+   {
+    "code": "HEAVY_OVERDRAFT_USE",
+    "label": "Recurring use of the overdraft",
+    "polarity": "adverse"
+   },
+   {
+    "code": "LOANS_REPAID_CLEAN",
+    "label": "Previous loans repaid without incident",
+    "polarity": "favourable"
+   },
+   {
+    "code": "PRECARIOUS_CONTRACT",
+    "label": "Precarious employment contract",
+    "polarity": "adverse"
+   },
+   {
+    "code": "SALARY_DOMICILED",
+    "label": "Salary paid into an account with the lender",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SHORT_JOB_TENURE",
+    "label": "Insufficient time in current job",
+    "polarity": "adverse"
+   },
+   {
+    "code": "SOLID_SAVINGS",
+    "label": "Sufficient precautionary savings",
+    "polarity": "favourable"
+   }
+  ],
+  "_stratum": "ficp"
+ },
+ {
+  "reference": "APP-2023-001245",
+  "operation": {
+   "loan_type": "HOME_IMPROVEMENT",
+   "requested_amount_eur": 4000,
+   "term_months": 82,
+   "apr_pct": 6.33,
+   "monthly_payment_eur": 60.77,
+   "down_payment_eur": 686.99,
+   "channel": "online"
+  },
+  "borrower": {
+   "contract_fr": "interim",
+   "months_in_job": 24,
+   "in_probation_period": false,
+   "occupation": "MANUAL_WORKER",
+   "has_co_borrower": false,
+   "household_size": 3,
+   "dependent_children": 1,
+   "housing_status": "OWNER_WITH_MORTGAGE",
+   "relationship_months": 227
+  },
+  "financials": {
+   "weighted_income_eur": 1649.12,
+   "counted_expenses_eur": 50.94,
+   "existing_loans": 2,
+   "existing_loan_payments_eur": 417.11,
+   "dti_before_pct": 28.38,
+   "dti_after_pct": 32.07,
+   "residual_income_per_cu_eur": 560.15,
+   "liquid_savings_eur": 355.38,
+   "savings_months_of_expenses": 0.67
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 65,
+   "rejected_debits_12m": 1,
+   "ficp_flagged": true,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 0,
+   "salary_domiciled": true
+  },
+  "decision": {
+   "result": "declined",
+   "approved_amount_eur": null,
+   "approved_term_months": null,
+   "conditions": null,
+   "risk_grade": "E"
+  },
+  "reasons": [
+   {
+    "code": "FICP_FLAG",
+    "label": "Registered on the FICP incident file",
+    "polarity": "adverse"
+   },
+   {
+    "code": "HEAVY_OVERDRAFT_USE",
+    "label": "Recurring use of the overdraft",
+    "polarity": "adverse"
+   },
+   {
+    "code": "LONG_RELATIONSHIP",
+    "label": "Long-standing banking relationship",
+    "polarity": "favourable"
+   },
+   {
+    "code": "LOW_RESIDUAL_INCOME",
+    "label": "Residual income per consumption unit too low",
+    "polarity": "adverse"
+   },
+   {
+    "code": "MEANINGFUL_DOWN_PAYMENT",
+    "label": "Meaningful down payment",
+    "polarity": "favourable"
+   },
+   {
+    "code": "PRECARIOUS_CONTRACT",
+    "label": "Precarious employment contract",
+    "polarity": "adverse"
+   },
+   {
+    "code": "SALARY_DOMICILED",
+    "label": "Salary paid into an account with the lender",
+    "polarity": "favourable"
+   }
+  ],
+  "_stratum": "ficp"
+ },
+ {
+  "reference": "APP-2021-000046",
+  "operation": {
+   "loan_type": "DEBT_CONSOLIDATION",
+   "requested_amount_eur": 8000,
+   "term_months": 113,
+   "apr_pct": 6.7,
+   "monthly_payment_eur": 95.52,
+   "down_payment_eur": 0,
+   "channel": "branch"
+  },
+  "borrower": {
+   "contract_fr": "independant",
+   "months_in_job": 42,
+   "in_probation_period": false,
+   "occupation": "FARMER",
+   "has_co_borrower": false,
+   "household_size": 1,
+   "dependent_children": 0,
+   "housing_status": "OWNER_OUTRIGHT",
+   "relationship_months": 205
+  },
+  "financials": {
+   "weighted_income_eur": 926.3,
+   "counted_expenses_eur": 0,
+   "existing_loans": 1,
+   "existing_loan_payments_eur": 60.25,
+   "dti_before_pct": 6.5,
+   "dti_after_pct": 10.31,
+   "residual_income_per_cu_eur": 830.78,
+   "liquid_savings_eur": 520.27,
+   "savings_months_of_expenses": 5.45
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 8,
+   "rejected_debits_12m": 0,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 2,
+   "salary_domiciled": true
+  },
+  "decision": {
+   "result": "approved_with_conditions",
+   "approved_amount_eur": 8000,
+   "approved_term_months": 107,
+   "conditions": "duree ramenee a 107 mois",
+   "risk_grade": "A"
+  },
+  "reasons": [
+   {
+    "code": "COMFORTABLE_DTI",
+    "label": "Comfortable debt-to-income ratio",
+    "polarity": "favourable"
+   },
+   {
+    "code": "LOANS_REPAID_CLEAN",
+    "label": "Previous loans repaid without incident",
+    "polarity": "favourable"
+   },
+   {
+    "code": "LONG_RELATIONSHIP",
+    "label": "Long-standing banking relationship",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SALARY_DOMICILED",
+    "label": "Salary paid into an account with the lender",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SOLID_SAVINGS",
+    "label": "Sufficient precautionary savings",
+    "polarity": "favourable"
+   },
+   {
+    "code": "TOO_MUCH_VARIABLE_PAY",
+    "label": "Variable share of income too high",
+    "polarity": "adverse"
+   }
+  ],
+  "_stratum": "conditional"
+ },
+ {
+  "reference": "APP-2021-000027",
+  "operation": {
+   "loan_type": "AUTO",
+   "requested_amount_eur": 9017.6,
+   "term_months": 49,
+   "apr_pct": 4.91,
+   "monthly_payment_eur": 204.23,
+   "down_payment_eur": 2692.16,
+   "channel": "online"
+  },
+  "borrower": {
+   "contract_fr": "CDI",
+   "months_in_job": 130,
+   "in_probation_period": false,
+   "occupation": "MANUAL_WORKER",
+   "has_co_borrower": false,
+   "household_size": 2,
+   "dependent_children": 1,
+   "housing_status": "EMPLOYER_HOUSING",
+   "relationship_months": 64
+  },
+  "financials": {
+   "weighted_income_eur": 1567.66,
+   "counted_expenses_eur": 87.79,
+   "existing_loans": 1,
+   "existing_loan_payments_eur": 130.73,
+   "dti_before_pct": 13.94,
+   "dti_after_pct": 26.97,
+   "residual_income_per_cu_eur": 763.27,
+   "liquid_savings_eur": 1806.53,
+   "savings_months_of_expenses": 4.27
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 16,
+   "rejected_debits_12m": 0,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 2,
+   "salary_domiciled": false
+  },
+  "decision": {
+   "result": "approved",
+   "approved_amount_eur": 9017.6,
+   "approved_term_months": 49,
+   "conditions": null,
+   "risk_grade": "A"
+  },
+  "reasons": [
+   {
+    "code": "COMFORTABLE_DTI",
+    "label": "Comfortable debt-to-income ratio",
+    "polarity": "favourable"
+   },
+   {
+    "code": "LOANS_REPAID_CLEAN",
+    "label": "Previous loans repaid without incident",
+    "polarity": "favourable"
+   },
+   {
+    "code": "MEANINGFUL_DOWN_PAYMENT",
+    "label": "Meaningful down payment",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SOLID_SAVINGS",
+    "label": "Sufficient precautionary savings",
+    "polarity": "favourable"
+   },
+   {
+    "code": "STABLE_EMPLOYMENT",
+    "label": "Stable employment situation",
+    "polarity": "favourable"
+   }
+  ],
+  "_stratum": "approved"
+ },
+ {
+  "reference": "APP-2022-000062",
+  "operation": {
+   "loan_type": "PERSONAL_LOAN",
+   "requested_amount_eur": 30485.84,
+   "term_months": 33,
+   "apr_pct": 7.55,
+   "monthly_payment_eur": 1017.71,
+   "down_payment_eur": 0,
+   "channel": "online"
+  },
+  "borrower": {
+   "contract_fr": "CDI",
+   "months_in_job": 23,
+   "in_probation_period": false,
+   "occupation": "MANAGER_PROFESSIONAL",
+   "has_co_borrower": false,
+   "household_size": 1,
+   "dependent_children": 0,
+   "housing_status": "TENANT",
+   "relationship_months": 35
+  },
+  "financials": {
+   "weighted_income_eur": 4527,
+   "counted_expenses_eur": 1510.52,
+   "existing_loans": 0,
+   "existing_loan_payments_eur": 0,
+   "dti_before_pct": 33.37,
+   "dti_after_pct": 55.85,
+   "residual_income_per_cu_eur": 1998.77,
+   "liquid_savings_eur": 20729.54,
+   "savings_months_of_expenses": 8.2
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 90,
+   "rejected_debits_12m": 1,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 1,
+   "salary_domiciled": true
+  },
+  "decision": {
+   "result": "declined",
+   "approved_amount_eur": null,
+   "approved_term_months": null,
+   "conditions": null,
+   "risk_grade": "B"
+  },
+  "reasons": [
+   {
+    "code": "AMPLE_RESIDUAL_INCOME",
+    "label": "Ample residual income",
+    "polarity": "favourable"
+   },
+   {
+    "code": "EXCESSIVE_DTI",
+    "label": "Debt-to-income ratio above the threshold",
+    "polarity": "adverse"
+   },
+   {
+    "code": "HEAVY_OVERDRAFT_USE",
+    "label": "Recurring use of the overdraft",
+    "polarity": "adverse"
+   },
+   {
+    "code": "HIGH_PAYMENT_SHOCK",
+    "label": "Payment shock too large",
+    "polarity": "adverse"
+   },
+   {
+    "code": "SALARY_DOMICILED",
+    "label": "Salary paid into an account with the lender",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SOLID_SAVINGS",
+    "label": "Sufficient precautionary savings",
+    "polarity": "favourable"
+   }
+  ],
+  "_stratum": "declined"
+ },
+ {
+  "reference": "APP-2024-000606",
+  "operation": {
+   "loan_type": "LEASE_TO_OWN",
+   "requested_amount_eur": 8000,
+   "term_months": 30,
+   "apr_pct": 5.57,
+   "monthly_payment_eur": 285.6,
+   "down_payment_eur": 0,
+   "channel": "point_of_sale"
+  },
+  "borrower": {
+   "contract_fr": "CDI",
+   "months_in_job": 46,
+   "in_probation_period": false,
+   "occupation": "CLERICAL",
+   "has_co_borrower": false,
+   "household_size": 2,
+   "dependent_children": 0,
+   "housing_status": "HOUSED_FREE",
+   "relationship_months": 178
+  },
+  "financials": {
+   "weighted_income_eur": 2449.94,
+   "counted_expenses_eur": 0,
+   "existing_loans": 2,
+   "existing_loan_payments_eur": 375.33,
+   "dti_before_pct": 15.32,
+   "dti_after_pct": 26.98,
+   "residual_income_per_cu_eur": 1192.67,
+   "liquid_savings_eur": 2398.95,
+   "savings_months_of_expenses": 3.63
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 27,
+   "rejected_debits_12m": 0,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 2,
+   "salary_domiciled": true
+  },
+  "decision": {
+   "result": "deferred",
+   "approved_amount_eur": null,
+   "approved_term_months": null,
+   "conditions": null,
+   "risk_grade": "A"
+  },
+  "reasons": [
+   {
+    "code": "COMFORTABLE_DTI",
+    "label": "Comfortable debt-to-income ratio",
+    "polarity": "favourable"
+   },
+   {
+    "code": "LOANS_REPAID_CLEAN",
+    "label": "Previous loans repaid without incident",
+    "polarity": "favourable"
+   },
+   {
+    "code": "LONG_RELATIONSHIP",
+    "label": "Long-standing banking relationship",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SALARY_DOMICILED",
+    "label": "Salary paid into an account with the lender",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SOLID_SAVINGS",
+    "label": "Sufficient precautionary savings",
+    "polarity": "favourable"
+   },
+   {
+    "code": "STABLE_EMPLOYMENT",
+    "label": "Stable employment situation",
+    "polarity": "favourable"
+   },
+   {
+    "code": "UNDOCUMENTED_INCOME",
+    "label": "Declared income not evidenced",
+    "polarity": "adverse"
+   }
+  ],
+  "_stratum": "deferred"
+ },
+ {
+  "reference": "APP-2024-001007",
+  "operation": {
+   "loan_type": "AUTO",
+   "requested_amount_eur": 10689.46,
+   "term_months": 36,
+   "apr_pct": 5.42,
+   "monthly_payment_eur": 317.79,
+   "down_payment_eur": 0,
+   "channel": "broker"
+  },
+  "borrower": {
+   "contract_fr": "retraite",
+   "months_in_job": 24,
+   "in_probation_period": false,
+   "occupation": "RETIRED",
+   "has_co_borrower": true,
+   "household_size": 2,
+   "dependent_children": 0,
+   "housing_status": "TENANT",
+   "relationship_months": 270
+  },
+  "financials": {
+   "weighted_income_eur": 2570.41,
+   "counted_expenses_eur": 951.47,
+   "existing_loans": 1,
+   "existing_loan_payments_eur": 117.25,
+   "dti_before_pct": 41.58,
+   "dti_after_pct": 53.94,
+   "residual_income_per_cu_eur": 789.27,
+   "liquid_savings_eur": 4857.03,
+   "savings_months_of_expenses": 3.5
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 85,
+   "rejected_debits_12m": 2,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 0,
+   "salary_domiciled": true
+  },
+  "decision": {
+   "result": "approved_with_conditions",
+   "approved_amount_eur": 6420.85,
+   "approved_term_months": 36,
+   "conditions": "montant ramene a 6421 EUR ; souscription de l'assurance emprunteur exigee",
+   "risk_grade": "B"
+  },
+  "reasons": [
+   {
+    "code": "EXCESSIVE_DTI",
+    "label": "Debt-to-income ratio above the threshold",
+    "polarity": "adverse"
+   },
+   {
+    "code": "HEAVY_OVERDRAFT_USE",
+    "label": "Recurring use of the overdraft",
+    "polarity": "adverse"
+   },
+   {
+    "code": "LONG_RELATIONSHIP",
+    "label": "Long-standing banking relationship",
+    "polarity": "favourable"
+   },
+   {
+    "code": "OVERRIDE_RELATIONSHIP",
+    "label": "Override justified by customer history",
+    "polarity": "favourable"
+   },
+   {
+    "code": "PAYMENT_INCIDENTS",
+    "label": "Payment incidents in the last 12 months",
+    "polarity": "adverse"
+   },
+   {
+    "code": "SALARY_DOMICILED",
+    "label": "Salary paid into an account with the lender",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SOLID_CO_BORROWER",
+    "label": "Co-borrower provides real support",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SOLID_SAVINGS",
+    "label": "Sufficient precautionary savings",
+    "polarity": "favourable"
+   },
+   {
+    "code": "STABLE_EMPLOYMENT",
+    "label": "Stable employment situation",
+    "polarity": "favourable"
+   }
+  ],
+  "_stratum": "override"
+ },
+ {
+  "reference": "APP-2021-000028",
+  "operation": {
+   "loan_type": "AUTO",
+   "requested_amount_eur": 12557.16,
+   "term_months": 47,
+   "apr_pct": 5.81,
+   "monthly_payment_eur": 294.91,
+   "down_payment_eur": 0,
+   "channel": "point_of_sale"
+  },
+  "borrower": {
+   "contract_fr": "CDI",
+   "months_in_job": 31,
+   "in_probation_period": false,
+   "occupation": "MANAGER_PROFESSIONAL",
+   "has_co_borrower": false,
+   "household_size": 3,
+   "dependent_children": 1,
+   "housing_status": "TENANT",
+   "relationship_months": 146
+  },
+  "financials": {
+   "weighted_income_eur": 4120.92,
+   "counted_expenses_eur": 1369.79,
+   "existing_loans": 3,
+   "existing_loan_payments_eur": 591.1700000000001,
+   "dti_before_pct": 47.59,
+   "dti_after_pct": 54.74,
+   "residual_income_per_cu_eur": 1036.14,
+   "liquid_savings_eur": 5393.46,
+   "savings_months_of_expenses": 2.39
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 53,
+   "rejected_debits_12m": 1,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 1,
+   "salary_domiciled": true
+  },
+  "decision": {
+   "result": "declined",
+   "approved_amount_eur": null,
+   "approved_term_months": null,
+   "conditions": null,
+   "risk_grade": "B"
+  },
+  "reasons": [
+   {
+    "code": "EXCESSIVE_DTI",
+    "label": "Debt-to-income ratio above the threshold",
+    "polarity": "adverse"
+   },
+   {
+    "code": "LONG_RELATIONSHIP",
+    "label": "Long-standing banking relationship",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SALARY_DOMICILED",
+    "label": "Salary paid into an account with the lender",
+    "polarity": "favourable"
+   },
+   {
+    "code": "STABLE_EMPLOYMENT",
+    "label": "Stable employment situation",
+    "polarity": "favourable"
+   }
+  ],
+  "_stratum": "declined"
+ },
+ {
+  "reference": "APP-2021-000038",
+  "operation": {
+   "loan_type": "DEBT_CONSOLIDATION",
+   "requested_amount_eur": 12304.27,
+   "term_months": 60,
+   "apr_pct": 7.92,
+   "monthly_payment_eur": 242.89,
+   "down_payment_eur": 0,
+   "channel": "broker"
+  },
+  "borrower": {
+   "contract_fr": "retraite",
+   "months_in_job": 28,
+   "in_probation_period": false,
+   "occupation": "RETIRED",
+   "has_co_borrower": false,
+   "household_size": 1,
+   "dependent_children": 0,
+   "housing_status": "TENANT",
+   "relationship_months": 310
+  },
+  "financials": {
+   "weighted_income_eur": 1955.91,
+   "counted_expenses_eur": 632.17,
+   "existing_loans": 0,
+   "existing_loan_payments_eur": 0,
+   "dti_before_pct": 32.32,
+   "dti_after_pct": 44.74,
+   "residual_income_per_cu_eur": 1080.85,
+   "liquid_savings_eur": 3816.31,
+   "savings_months_of_expenses": 4.36
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 17,
+   "rejected_debits_12m": 2,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 1,
+   "salary_domiciled": false
+  },
+  "decision": {
+   "result": "approved_with_conditions",
+   "approved_amount_eur": 8125.26,
+   "approved_term_months": 48,
+   "conditions": "montant ramene a 8125 EUR ; duree ramenee a 48 mois ; souscription de l'assurance emprunteur exigee",
+   "risk_grade": "A"
+  },
+  "reasons": [
+   {
+    "code": "EXCESSIVE_DTI",
+    "label": "Debt-to-income ratio above the threshold",
+    "polarity": "adverse"
+   },
+   {
+    "code": "LONG_RELATIONSHIP",
+    "label": "Long-standing banking relationship",
+    "polarity": "favourable"
+   },
+   {
+    "code": "PAYMENT_INCIDENTS",
+    "label": "Payment incidents in the last 12 months",
+    "polarity": "adverse"
+   },
+   {
+    "code": "SOLID_SAVINGS",
+    "label": "Sufficient precautionary savings",
+    "polarity": "favourable"
+   },
+   {
+    "code": "STABLE_EMPLOYMENT",
+    "label": "Stable employment situation",
+    "polarity": "favourable"
+   }
+  ],
+  "_stratum": "conditional"
+ },
+ {
+  "reference": "APP-2023-000231",
+  "operation": {
+   "loan_type": "PERSONAL_LOAN",
+   "requested_amount_eur": 9757.75,
+   "term_months": 56,
+   "apr_pct": 5.82,
+   "monthly_payment_eur": 200.08,
+   "down_payment_eur": 0,
+   "channel": "branch"
+  },
+  "borrower": {
+   "contract_fr": "CDI",
+   "months_in_job": 6,
+   "in_probation_period": false,
+   "occupation": "INTERMEDIATE",
+   "has_co_borrower": false,
+   "household_size": 2,
+   "dependent_children": 0,
+   "housing_status": "HOUSED_FREE",
+   "relationship_months": 5
+  },
+  "financials": {
+   "weighted_income_eur": 2633.27,
+   "counted_expenses_eur": 148.12,
+   "existing_loans": 0,
+   "existing_loan_payments_eur": 0,
+   "dti_before_pct": 5.62,
+   "dti_after_pct": 13.22,
+   "residual_income_per_cu_eur": 1523.38,
+   "liquid_savings_eur": 3643.18,
+   "savings_months_of_expenses": 10.46
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 75,
+   "rejected_debits_12m": 1,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 1,
+   "salary_domiciled": false
+  },
+  "decision": {
+   "result": "approved",
+   "approved_amount_eur": 9757.75,
+   "approved_term_months": 56,
+   "conditions": null,
+   "risk_grade": "A"
+  },
+  "reasons": [
+   {
+    "code": "AMPLE_RESIDUAL_INCOME",
+    "label": "Ample residual income",
+    "polarity": "favourable"
+   },
+   {
+    "code": "COMFORTABLE_DTI",
+    "label": "Comfortable debt-to-income ratio",
+    "polarity": "favourable"
+   },
+   {
+    "code": "HEAVY_OVERDRAFT_USE",
+    "label": "Recurring use of the overdraft",
+    "polarity": "adverse"
+   },
+   {
+    "code": "SHORT_JOB_TENURE",
+    "label": "Insufficient time in current job",
+    "polarity": "adverse"
+   },
+   {
+    "code": "SOLID_SAVINGS",
+    "label": "Sufficient precautionary savings",
+    "polarity": "favourable"
+   }
+  ],
+  "_stratum": "observed_default"
+ },
+ {
+  "reference": "APP-2023-000004",
+  "operation": {
+   "loan_type": "PERSONAL_LOAN",
+   "requested_amount_eur": 17937.96,
+   "term_months": 69,
+   "apr_pct": 4.99,
+   "monthly_payment_eur": 297.8,
+   "down_payment_eur": 0,
+   "channel": "branch"
+  },
+  "borrower": {
+   "contract_fr": "CDI",
+   "months_in_job": 24,
+   "in_probation_period": false,
+   "occupation": "CLERICAL",
+   "has_co_borrower": false,
+   "household_size": 1,
+   "dependent_children": 0,
+   "housing_status": "OWNER_WITH_MORTGAGE",
+   "relationship_months": 11
+  },
+  "financials": {
+   "weighted_income_eur": 2142.01,
+   "counted_expenses_eur": 0,
+   "existing_loans": 1,
+   "existing_loan_payments_eur": 369.59,
+   "dti_before_pct": 17.25,
+   "dti_after_pct": 31.16,
+   "residual_income_per_cu_eur": 1474.62,
+   "liquid_savings_eur": 3346.17,
+   "savings_months_of_expenses": 5.01
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 41,
+   "rejected_debits_12m": 2,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 1,
+   "salary_domiciled": false
+  },
+  "decision": {
+   "result": "approved_with_conditions",
+   "approved_amount_eur": 17937.96,
+   "approved_term_months": 69,
+   "conditions": "justificatifs de revenus complementaires exiges avant deblocage",
+   "risk_grade": "A"
+  },
+  "reasons": [
+   {
+    "code": "AMPLE_RESIDUAL_INCOME",
+    "label": "Ample residual income",
+    "polarity": "favourable"
+   },
+   {
+    "code": "PAYMENT_INCIDENTS",
+    "label": "Payment incidents in the last 12 months",
+    "polarity": "adverse"
+   },
+   {
+    "code": "SOLID_SAVINGS",
+    "label": "Sufficient precautionary savings",
+    "polarity": "favourable"
+   },
+   {
+    "code": "STABLE_EMPLOYMENT",
+    "label": "Stable employment situation",
+    "polarity": "favourable"
+   }
+  ],
+  "_stratum": "conditional"
+ },
+ {
+  "reference": "APP-2023-000109",
+  "operation": {
+   "loan_type": "AUTO",
+   "requested_amount_eur": 5000,
+   "term_months": 60,
+   "apr_pct": 6.25,
+   "monthly_payment_eur": 95.9,
+   "down_payment_eur": 0,
+   "channel": "branch"
+  },
+  "borrower": {
+   "contract_fr": "CDD",
+   "months_in_job": 24,
+   "in_probation_period": false,
+   "occupation": "STUDENT",
+   "has_co_borrower": false,
+   "household_size": 1,
+   "dependent_children": 0,
+   "housing_status": "OWNER_WITH_MORTGAGE",
+   "relationship_months": 18
+  },
+  "financials": {
+   "weighted_income_eur": 620,
+   "counted_expenses_eur": 0,
+   "existing_loans": 2,
+   "existing_loan_payments_eur": 191.37,
+   "dti_before_pct": 30.87,
+   "dti_after_pct": 46.33,
+   "residual_income_per_cu_eur": 332.73,
+   "liquid_savings_eur": 3048.28,
+   "savings_months_of_expenses": 10.61
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 60,
+   "rejected_debits_12m": 3,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 1,
+   "salary_domiciled": true
+  },
+  "decision": {
+   "result": "approved_with_conditions",
+   "approved_amount_eur": 5000,
+   "approved_term_months": 58,
+   "conditions": "duree ramenee a 58 mois ; souscription de l'assurance emprunteur exigee",
+   "risk_grade": "C"
+  },
+  "reasons": [
+   {
+    "code": "EXCESSIVE_DTI",
+    "label": "Debt-to-income ratio above the threshold",
+    "polarity": "adverse"
+   },
+   {
+    "code": "LOW_RESIDUAL_INCOME",
+    "label": "Residual income per consumption unit too low",
+    "polarity": "adverse"
+   },
+   {
+    "code": "OVERRIDE_WEALTH",
+    "label": "Override justified by assets held",
+    "polarity": "favourable"
+   },
+   {
+    "code": "PAYMENT_INCIDENTS",
+    "label": "Payment incidents in the last 12 months",
+    "polarity": "adverse"
+   },
+   {
+    "code": "SALARY_DOMICILED",
+    "label": "Salary paid into an account with the lender",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SOLID_SAVINGS",
+    "label": "Sufficient precautionary savings",
+    "polarity": "favourable"
+   }
+  ],
+  "_stratum": "override"
+ },
+ {
+  "reference": "APP-2021-000386",
+  "operation": {
+   "loan_type": "DEBT_CONSOLIDATION",
+   "requested_amount_eur": 17752.95,
+   "term_months": 56,
+   "apr_pct": 7.48,
+   "monthly_payment_eur": 376.82,
+   "down_payment_eur": 0,
+   "channel": "point_of_sale"
+  },
+  "borrower": {
+   "contract_fr": "independant",
+   "months_in_job": 41,
+   "in_probation_period": false,
+   "occupation": "MANAGER_PROFESSIONAL",
+   "has_co_borrower": true,
+   "household_size": 2,
+   "dependent_children": 0,
+   "housing_status": "OWNER_WITH_MORTGAGE",
+   "relationship_months": 142
+  },
+  "financials": {
+   "weighted_income_eur": 5127.83,
+   "counted_expenses_eur": 295.2,
+   "existing_loans": 3,
+   "existing_loan_payments_eur": 1272.8999999999999,
+   "dti_before_pct": 30.58,
+   "dti_after_pct": 27.16,
+   "residual_income_per_cu_eur": 2490.02,
+   "liquid_savings_eur": 4367.18,
+   "savings_months_of_expenses": 3.14
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 33,
+   "rejected_debits_12m": 1,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 0,
+   "salary_domiciled": true
+  },
+  "decision": {
+   "result": "approved",
+   "approved_amount_eur": 17752.95,
+   "approved_term_months": 56,
+   "conditions": null,
+   "risk_grade": "A"
+  },
+  "reasons": [
+   {
+    "code": "AMPLE_RESIDUAL_INCOME",
+    "label": "Ample residual income",
+    "polarity": "favourable"
+   },
+   {
+    "code": "COMFORTABLE_DTI",
+    "label": "Comfortable debt-to-income ratio",
+    "polarity": "favourable"
+   },
+   {
+    "code": "LONG_RELATIONSHIP",
+    "label": "Long-standing banking relationship",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SALARY_DOMICILED",
+    "label": "Salary paid into an account with the lender",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SOLID_CO_BORROWER",
+    "label": "Co-borrower provides real support",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SOLID_SAVINGS",
+    "label": "Sufficient precautionary savings",
+    "polarity": "favourable"
+   },
+   {
+    "code": "TOO_MUCH_VARIABLE_PAY",
+    "label": "Variable share of income too high",
+    "polarity": "adverse"
+   }
+  ],
+  "_stratum": "consolidation"
+ },
+ {
+  "reference": "APP-2025-000066",
+  "operation": {
+   "loan_type": "HOME_IMPROVEMENT",
+   "requested_amount_eur": 24001.1,
+   "term_months": 55,
+   "apr_pct": 4.12,
+   "monthly_payment_eur": 469.11,
+   "down_payment_eur": 4621.9,
+   "channel": "branch"
+  },
+  "borrower": {
+   "contract_fr": "CDI",
+   "months_in_job": 76,
+   "in_probation_period": false,
+   "occupation": "CLERICAL",
+   "has_co_borrower": false,
+   "household_size": 6,
+   "dependent_children": 4,
+   "housing_status": "TENANT",
+   "relationship_months": 240
+  },
+  "financials": {
+   "weighted_income_eur": 2114.77,
+   "counted_expenses_eur": 691.35,
+   "existing_loans": 0,
+   "existing_loan_payments_eur": 0,
+   "dti_before_pct": 32.69,
+   "dti_after_pct": 54.87,
+   "residual_income_per_cu_eur": 272.66,
+   "liquid_savings_eur": 4786.86,
+   "savings_months_of_expenses": 4.12
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 63,
+   "rejected_debits_12m": 1,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 1,
+   "salary_domiciled": true
+  },
+  "decision": {
+   "result": "declined",
+   "approved_amount_eur": null,
+   "approved_term_months": null,
+   "conditions": null,
+   "risk_grade": "B"
+  },
+  "reasons": [
+   {
+    "code": "EXCESSIVE_DTI",
+    "label": "Debt-to-income ratio above the threshold",
+    "polarity": "adverse"
+   },
+   {
+    "code": "HEAVY_OVERDRAFT_USE",
+    "label": "Recurring use of the overdraft",
+    "polarity": "adverse"
+   },
+   {
+    "code": "HIGH_PAYMENT_SHOCK",
+    "label": "Payment shock too large",
+    "polarity": "adverse"
+   },
+   {
+    "code": "LONG_RELATIONSHIP",
+    "label": "Long-standing banking relationship",
+    "polarity": "favourable"
+   },
+   {
+    "code": "LOW_RESIDUAL_INCOME",
+    "label": "Residual income per consumption unit too low",
+    "polarity": "adverse"
+   },
+   {
+    "code": "MEANINGFUL_DOWN_PAYMENT",
+    "label": "Meaningful down payment",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SALARY_DOMICILED",
+    "label": "Salary paid into an account with the lender",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SOLID_SAVINGS",
+    "label": "Sufficient precautionary savings",
+    "polarity": "favourable"
+   },
+   {
+    "code": "STABLE_EMPLOYMENT",
+    "label": "Stable employment situation",
+    "polarity": "favourable"
+   }
+  ],
+  "_stratum": "declined"
+ },
+ {
+  "reference": "APP-2024-000710",
+  "operation": {
+   "loan_type": "AUTO",
+   "requested_amount_eur": 5000,
+   "term_months": 49,
+   "apr_pct": 5.97,
+   "monthly_payment_eur": 114.95,
+   "down_payment_eur": 0,
+   "channel": "branch"
+  },
+  "borrower": {
+   "contract_fr": "CDI",
+   "months_in_job": 12,
+   "in_probation_period": false,
+   "occupation": "INTERMEDIATE",
+   "has_co_borrower": false,
+   "household_size": 1,
+   "dependent_children": 0,
+   "housing_status": "TENANT",
+   "relationship_months": 6
+  },
+  "financials": {
+   "weighted_income_eur": 1839.1,
+   "counted_expenses_eur": 522.11,
+   "existing_loans": 0,
+   "existing_loan_payments_eur": 0,
+   "dti_before_pct": 28.39,
+   "dti_after_pct": 34.64,
+   "residual_income_per_cu_eur": 1202.04,
+   "liquid_savings_eur": 423.89,
+   "savings_months_of_expenses": 0.67
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 0,
+   "rejected_debits_12m": 2,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 0,
+   "salary_domiciled": true
+  },
+  "decision": {
+   "result": "deferred",
+   "approved_amount_eur": null,
+   "approved_term_months": null,
+   "conditions": null,
+   "risk_grade": "A"
+  },
+  "reasons": [
+   {
+    "code": "NO_SECURITY",
+    "label": "Neither down payment nor security",
+    "polarity": "adverse"
+   },
+   {
+    "code": "PAYMENT_INCIDENTS",
+    "label": "Payment incidents in the last 12 months",
+    "polarity": "adverse"
+   },
+   {
+    "code": "SALARY_DOMICILED",
+    "label": "Salary paid into an account with the lender",
+    "polarity": "favourable"
+   },
+   {
+    "code": "UNDOCUMENTED_INCOME",
+    "label": "Declared income not evidenced",
+    "polarity": "adverse"
+   }
+  ],
+  "_stratum": "deferred"
+ },
+ {
+  "reference": "APP-2021-000382",
+  "operation": {
+   "loan_type": "HOME_IMPROVEMENT",
+   "requested_amount_eur": 4760.5,
+   "term_months": 72,
+   "apr_pct": 5.72,
+   "monthly_payment_eur": 77.7,
+   "down_payment_eur": 0,
+   "channel": "branch"
+  },
+  "borrower": {
+   "contract_fr": "CDI",
+   "months_in_job": 24,
+   "in_probation_period": false,
+   "occupation": "MANUAL_WORKER",
+   "has_co_borrower": true,
+   "household_size": 4,
+   "dependent_children": 2,
+   "housing_status": "OWNER_WITH_MORTGAGE",
+   "relationship_months": 85
+  },
+  "financials": {
+   "weighted_income_eur": 3801.44,
+   "counted_expenses_eur": 0,
+   "existing_loans": 2,
+   "existing_loan_payments_eur": 759.09,
+   "dti_before_pct": 19.97,
+   "dti_after_pct": 22.01,
+   "residual_income_per_cu_eur": 1288.98,
+   "liquid_savings_eur": 2829.37,
+   "savings_months_of_expenses": 3.38
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 86,
+   "rejected_debits_12m": 2,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 0,
+   "salary_domiciled": false
+  },
+  "decision": {
+   "result": "approved",
+   "approved_amount_eur": 4760.5,
+   "approved_term_months": 72,
+   "conditions": null,
+   "risk_grade": "A"
+  },
+  "reasons": [
+   {
+    "code": "COMFORTABLE_DTI",
+    "label": "Comfortable debt-to-income ratio",
+    "polarity": "favourable"
+   },
+   {
+    "code": "HEAVY_OVERDRAFT_USE",
+    "label": "Recurring use of the overdraft",
+    "polarity": "adverse"
+   },
+   {
+    "code": "PAYMENT_INCIDENTS",
+    "label": "Payment incidents in the last 12 months",
+    "polarity": "adverse"
+   },
+   {
+    "code": "SOLID_CO_BORROWER",
+    "label": "Co-borrower provides real support",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SOLID_SAVINGS",
+    "label": "Sufficient precautionary savings",
+    "polarity": "favourable"
+   },
+   {
+    "code": "STABLE_EMPLOYMENT",
+    "label": "Stable employment situation",
+    "polarity": "favourable"
+   }
+  ],
+  "_stratum": "observed_default"
+ },
+ {
+  "reference": "APP-2025-000082",
+  "operation": {
+   "loan_type": "DEBT_CONSOLIDATION",
+   "requested_amount_eur": 8000,
+   "term_months": 50,
+   "apr_pct": 7.47,
+   "monthly_payment_eur": 184.89,
+   "down_payment_eur": 0,
+   "channel": "branch"
+  },
+  "borrower": {
+   "contract_fr": "CDD",
+   "months_in_job": 15,
+   "in_probation_period": false,
+   "occupation": "CLERICAL",
+   "has_co_borrower": false,
+   "household_size": 3,
+   "dependent_children": 2,
+   "housing_status": "TENANT",
+   "relationship_months": 181
+  },
+  "financials": {
+   "weighted_income_eur": 2380.19,
+   "counted_expenses_eur": 519.95,
+   "existing_loans": 0,
+   "existing_loan_payments_eur": 0,
+   "dti_before_pct": 21.84,
+   "dti_after_pct": 29.61,
+   "residual_income_per_cu_eur": 1047.09,
+   "liquid_savings_eur": 5834.24,
+   "savings_months_of_expenses": 8.28
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 22,
+   "rejected_debits_12m": 1,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 2,
+   "salary_domiciled": true
+  },
+  "decision": {
+   "result": "approved",
+   "approved_amount_eur": 8000,
+   "approved_term_months": 50,
+   "conditions": null,
+   "risk_grade": "A"
+  },
+  "reasons": [
+   {
+    "code": "LOANS_REPAID_CLEAN",
+    "label": "Previous loans repaid without incident",
+    "polarity": "favourable"
+   },
+   {
+    "code": "LONG_RELATIONSHIP",
+    "label": "Long-standing banking relationship",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SALARY_DOMICILED",
+    "label": "Salary paid into an account with the lender",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SOLID_SAVINGS",
+    "label": "Sufficient precautionary savings",
+    "polarity": "favourable"
+   }
+  ],
+  "_stratum": "consolidation"
+ },
+ {
+  "reference": "APP-2023-000013",
+  "operation": {
+   "loan_type": "PERSONAL_LOAN",
+   "requested_amount_eur": 24309.19,
+   "term_months": 53,
+   "apr_pct": 8,
+   "monthly_payment_eur": 542.94,
+   "down_payment_eur": 0,
+   "channel": "online"
+  },
+  "borrower": {
+   "contract_fr": "CDI",
+   "months_in_job": 29,
+   "in_probation_period": false,
+   "occupation": "MANAGER_PROFESSIONAL",
+   "has_co_borrower": false,
+   "household_size": 3,
+   "dependent_children": 1,
+   "housing_status": "HOUSED_FREE",
+   "relationship_months": 29
+  },
+  "financials": {
+   "weighted_income_eur": 3412.88,
+   "counted_expenses_eur": 321.14,
+   "existing_loans": 0,
+   "existing_loan_payments_eur": 0,
+   "dti_before_pct": 9.41,
+   "dti_after_pct": 25.32,
+   "residual_income_per_cu_eur": 1416,
+   "liquid_savings_eur": 12144.89,
+   "savings_months_of_expenses": 14.06
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 41,
+   "rejected_debits_12m": 1,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 1,
+   "salary_domiciled": false
+  },
+  "decision": {
+   "result": "approved",
+   "approved_amount_eur": 24309.19,
+   "approved_term_months": 53,
+   "conditions": null,
+   "risk_grade": "A"
+  },
+  "reasons": [
+   {
+    "code": "AMPLE_RESIDUAL_INCOME",
+    "label": "Ample residual income",
+    "polarity": "favourable"
+   },
+   {
+    "code": "COMFORTABLE_DTI",
+    "label": "Comfortable debt-to-income ratio",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SOLID_SAVINGS",
+    "label": "Sufficient precautionary savings",
+    "polarity": "favourable"
+   },
+   {
+    "code": "STABLE_EMPLOYMENT",
+    "label": "Stable employment situation",
+    "polarity": "favourable"
+   }
+  ],
+  "_stratum": "approved"
+ },
+ {
+  "reference": "APP-2024-000059",
+  "operation": {
+   "loan_type": "AUTO",
+   "requested_amount_eur": 6818.75,
+   "term_months": 29,
+   "apr_pct": 5.91,
+   "monthly_payment_eur": 252.65,
+   "down_payment_eur": 0,
+   "channel": "branch"
+  },
+  "borrower": {
+   "contract_fr": "CDI",
+   "months_in_job": 17,
+   "in_probation_period": false,
+   "occupation": "INTERMEDIATE",
+   "has_co_borrower": true,
+   "household_size": 4,
+   "dependent_children": 2,
+   "housing_status": "TENANT",
+   "relationship_months": 55
+  },
+  "financials": {
+   "weighted_income_eur": 3808.52,
+   "counted_expenses_eur": 1233.6,
+   "existing_loans": 0,
+   "existing_loan_payments_eur": 0,
+   "dti_before_pct": 32.39,
+   "dti_after_pct": 39.02,
+   "residual_income_per_cu_eur": 1009.68,
+   "liquid_savings_eur": 1883.9,
+   "savings_months_of_expenses": 1.27
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 59,
+   "rejected_debits_12m": 1,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 0,
+   "salary_domiciled": true
+  },
+  "decision": {
+   "result": "approved_with_conditions",
+   "approved_amount_eur": 5127.17,
+   "approved_term_months": 22,
+   "conditions": "montant ramene a 5127 EUR ; duree ramenee a 22 mois",
+   "risk_grade": "A"
+  },
+  "reasons": [
+   {
+    "code": "EXCESSIVE_DTI",
+    "label": "Debt-to-income ratio above the threshold",
+    "polarity": "adverse"
+   },
+   {
+    "code": "SALARY_DOMICILED",
+    "label": "Salary paid into an account with the lender",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SOLID_CO_BORROWER",
+    "label": "Co-borrower provides real support",
+    "polarity": "favourable"
+   }
+  ],
+  "_stratum": "above_hcsf_approved"
+ },
+ {
+  "reference": "APP-2021-000214",
+  "operation": {
+   "loan_type": "HOME_IMPROVEMENT",
+   "requested_amount_eur": 17282.35,
+   "term_months": 75,
+   "apr_pct": 4.73,
+   "monthly_payment_eur": 261.84,
+   "down_payment_eur": 1476.24,
+   "channel": "broker"
+  },
+  "borrower": {
+   "contract_fr": "sans emploi",
+   "months_in_job": 80,
+   "in_probation_period": false,
+   "occupation": "INACTIVE",
+   "has_co_borrower": true,
+   "household_size": 2,
+   "dependent_children": 0,
+   "housing_status": "HOUSED_FREE",
+   "relationship_months": 230
+  },
+  "financials": {
+   "weighted_income_eur": 1693.99,
+   "counted_expenses_eur": 0,
+   "existing_loans": 1,
+   "existing_loan_payments_eur": 120.51,
+   "dti_before_pct": 7.11,
+   "dti_after_pct": 22.57,
+   "residual_income_per_cu_eur": 874.43,
+   "liquid_savings_eur": 4956.08,
+   "savings_months_of_expenses": 12.96
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 67,
+   "rejected_debits_12m": 2,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 0,
+   "salary_domiciled": true
+  },
+  "decision": {
+   "result": "approved",
+   "approved_amount_eur": 17282.35,
+   "approved_term_months": 75,
+   "conditions": null,
+   "risk_grade": "A"
+  },
+  "reasons": [
+   {
+    "code": "COMFORTABLE_DTI",
+    "label": "Comfortable debt-to-income ratio",
+    "polarity": "favourable"
+   },
+   {
+    "code": "HEAVY_OVERDRAFT_USE",
+    "label": "Recurring use of the overdraft",
+    "polarity": "adverse"
+   },
+   {
+    "code": "LONG_RELATIONSHIP",
+    "label": "Long-standing banking relationship",
+    "polarity": "favourable"
+   },
+   {
+    "code": "PAYMENT_INCIDENTS",
+    "label": "Payment incidents in the last 12 months",
+    "polarity": "adverse"
+   },
+   {
+    "code": "PRECARIOUS_CONTRACT",
+    "label": "Precarious employment contract",
+    "polarity": "adverse"
+   },
+   {
+    "code": "SALARY_DOMICILED",
+    "label": "Salary paid into an account with the lender",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SOLID_CO_BORROWER",
+    "label": "Co-borrower provides real support",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SOLID_SAVINGS",
+    "label": "Sufficient precautionary savings",
+    "polarity": "favourable"
+   }
+  ],
+  "_stratum": "precarious_contract"
+ },
+ {
+  "reference": "APP-2022-000076",
+  "operation": {
+   "loan_type": "LEASE_TO_OWN",
+   "requested_amount_eur": 8000,
+   "term_months": 27,
+   "apr_pct": 6.69,
+   "monthly_payment_eur": 320.5,
+   "down_payment_eur": 2008.53,
+   "channel": "online"
+  },
+  "borrower": {
+   "contract_fr": "CDI",
+   "months_in_job": 28,
+   "in_probation_period": false,
+   "occupation": "INTERMEDIATE",
+   "has_co_borrower": false,
+   "household_size": 3,
+   "dependent_children": 1,
+   "housing_status": "TENANT",
+   "relationship_months": 100
+  },
+  "financials": {
+   "weighted_income_eur": 2269.42,
+   "counted_expenses_eur": 736.34,
+   "existing_loans": 1,
+   "existing_loan_payments_eur": 59.91,
+   "dti_before_pct": 35.09,
+   "dti_after_pct": 49.21,
+   "residual_income_per_cu_eur": 576.34,
+   "liquid_savings_eur": 7849.27,
+   "savings_months_of_expenses": 7.03
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 0,
+   "rejected_debits_12m": 0,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 3,
+   "salary_domiciled": false
+  },
+  "decision": {
+   "result": "declined",
+   "approved_amount_eur": null,
+   "approved_term_months": null,
+   "conditions": null,
+   "risk_grade": "B"
+  },
+  "reasons": [
+   {
+    "code": "CLEAN_HISTORY",
+    "label": "No incident over the observed period",
+    "polarity": "favourable"
+   },
+   {
+    "code": "EXCESSIVE_DTI",
+    "label": "Debt-to-income ratio above the threshold",
+    "polarity": "adverse"
+   },
+   {
+    "code": "LOANS_REPAID_CLEAN",
+    "label": "Previous loans repaid without incident",
+    "polarity": "favourable"
+   },
+   {
+    "code": "LONG_RELATIONSHIP",
+    "label": "Long-standing banking relationship",
+    "polarity": "favourable"
+   },
+   {
+    "code": "LOW_RESIDUAL_INCOME",
+    "label": "Residual income per consumption unit too low",
+    "polarity": "adverse"
+   },
+   {
+    "code": "MEANINGFUL_DOWN_PAYMENT",
+    "label": "Meaningful down payment",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SOLID_SAVINGS",
+    "label": "Sufficient precautionary savings",
+    "polarity": "favourable"
+   },
+   {
+    "code": "STABLE_EMPLOYMENT",
+    "label": "Stable employment situation",
+    "polarity": "favourable"
+   }
+  ],
+  "_stratum": "declined"
+ },
+ {
+  "reference": "APP-2023-000347",
+  "operation": {
+   "loan_type": "AUTO",
+   "requested_amount_eur": 13939.98,
+   "term_months": 73,
+   "apr_pct": 5.39,
+   "monthly_payment_eur": 225.07,
+   "down_payment_eur": 0,
+   "channel": "point_of_sale"
+  },
+  "borrower": {
+   "contract_fr": "CDI",
+   "months_in_job": 82,
+   "in_probation_period": false,
+   "occupation": "INTERMEDIATE",
+   "has_co_borrower": false,
+   "household_size": 1,
+   "dependent_children": 0,
+   "housing_status": "OWNER_OUTRIGHT",
+   "relationship_months": 35
+  },
+  "financials": {
+   "weighted_income_eur": 2124.66,
+   "counted_expenses_eur": 0,
+   "existing_loans": 0,
+   "existing_loan_payments_eur": 0,
+   "dti_before_pct": 0,
+   "dti_after_pct": 10.59,
+   "residual_income_per_cu_eur": 1899.59,
+   "liquid_savings_eur": 287.33,
+   "savings_months_of_expenses": 1.28
+  },
+  "behaviour": {
+   "days_overdrawn_12m": 0,
+   "rejected_debits_12m": 1,
+   "ficp_flagged": false,
+   "fcc_flagged": false,
+   "loans_repaid_clean": 3,
+   "salary_domiciled": true
+  },
+  "decision": {
+   "result": "deferred",
+   "approved_amount_eur": null,
+   "approved_term_months": null,
+   "conditions": null,
+   "risk_grade": "A"
+  },
+  "reasons": [
+   {
+    "code": "AMPLE_RESIDUAL_INCOME",
+    "label": "Ample residual income",
+    "polarity": "favourable"
+   },
+   {
+    "code": "COMFORTABLE_DTI",
+    "label": "Comfortable debt-to-income ratio",
+    "polarity": "favourable"
+   },
+   {
+    "code": "LOANS_REPAID_CLEAN",
+    "label": "Previous loans repaid without incident",
+    "polarity": "favourable"
+   },
+   {
+    "code": "SALARY_DOMICILED",
+    "label": "Salary paid into an account with the lender",
+    "polarity": "favourable"
+   },
+   {
+    "code": "STABLE_EMPLOYMENT",
+    "label": "Stable employment situation",
+    "polarity": "favourable"
+   },
+   {
+    "code": "UNDOCUMENTED_INCOME",
+    "label": "Declared income not evidenced",
+    "polarity": "adverse"
+   }
+  ],
+  "_stratum": "deferred"
+ }
+]
