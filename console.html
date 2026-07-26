@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Credit scoring console</title>
+<style>
+  :root {
+    --bg: #fbfaf8; --card: #fff; --border: #e3e0da; --text: #1c1a17;
+    --muted: #6b6660; --accent: #8a5a3c; --accent-soft: #f2ece6;
+    --a: #2f7d54; --b: #5b8f3e; --c: #b8862a; --d: #c2622c; --e: #a83232;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17161a; --card: #201f24; --border: #34323a; --text: #ece9e4;
+      --muted: #a09a92; --accent: #d19a6e; --accent-soft: #2b2620;
+      --a: #5fbb85; --b: #8dc06a; --c: #d7ad55; --d: #e08a4e; --e: #e06a6a;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #fbfaf8; --card: #fff; --border: #e3e0da; --text: #1c1a17;
+    --muted: #6b6660; --accent: #8a5a3c; --accent-soft: #f2ece6;
+    --a: #2f7d54; --b: #5b8f3e; --c: #b8862a; --d: #c2622c; --e: #a83232;
+  }
+  :root[data-theme="dark"] {
+    --bg: #17161a; --card: #201f24; --border: #34323a; --text: #ece9e4;
+    --muted: #a09a92; --accent: #d19a6e; --accent-soft: #2b2620;
+    --a: #5fbb85; --b: #8dc06a; --c: #d7ad55; --d: #e08a4e; --e: #e06a6a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 15px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  header {
+    padding: 1.3rem 1.6rem .9rem; border-bottom: 1px solid var(--border);
+    display: flex; flex-wrap: wrap; gap: .7rem 1.3rem; align-items: baseline;
+  }
+  h1 { font-size: 1.12rem; margin: 0; font-weight: 600; letter-spacing: -.01em; }
+  .model { font-size: .79rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .model code { background: var(--accent-soft); padding: .1rem .35rem; border-radius: 3px; }
+  .lang { margin-left: auto; display: flex; border: 1px solid var(--border); border-radius: 5px; overflow: hidden; }
+  .lang button {
+    border: 0; background: none; color: var(--muted); font: inherit; font-size: .8rem;
+    padding: .25rem .6rem; cursor: pointer;
+  }
+  .lang button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+  main { display: grid; grid-template-columns: minmax(240px, 310px) 1fr; gap: 1.2rem; padding: 1.2rem 1.6rem 3rem; }
+  @media (max-width: 880px) { main { grid-template-columns: 1fr; } }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
+  h2 { font-size: .77rem; text-transform: uppercase; letter-spacing: .06em;
+       color: var(--muted); margin: 0; padding: .8rem 1rem; border-bottom: 1px solid var(--border); font-weight: 600; }
+  ul { list-style: none; margin: 0; padding: .4rem; }
+  li button {
+    width: 100%; text-align: left; background: none; border: 0; border-radius: 5px;
+    padding: .5rem .6rem; cursor: pointer; color: inherit; font: inherit; line-height: 1.35;
+  }
+  li button:hover { background: var(--accent-soft); }
+  li button[aria-current="true"] { background: var(--accent-soft); box-shadow: inset 2px 0 0 var(--accent); }
+  li .ref { display: block; font-size: .72rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .bar { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; padding: .7rem 1rem; border-bottom: 1px solid var(--border); }
+  button.action {
+    background: var(--accent); color: #fff; border: 0; border-radius: 5px;
+    padding: .45rem .9rem; font: inherit; font-weight: 500; cursor: pointer;
+  }
+  button.action.ghost { background: none; color: var(--accent); border: 1px solid var(--border); }
+  button.action:disabled { opacity: .5; cursor: progress; }
+  label { font-size: .82rem; color: var(--muted); }
+  input[type=number] {
+    width: 4.5rem; padding: .3rem .4rem; border: 1px solid var(--border);
+    border-radius: 4px; background: var(--bg); color: inherit; font: inherit;
+  }
+  textarea {
+    width: 100%; min-height: 15rem; border: 0; border-radius: 0 0 8px 8px; resize: vertical;
+    padding: .8rem 1rem; background: transparent; color: inherit;
+    font: 12.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  textarea:focus { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .result { margin-top: 1.2rem; }
+  .result-head { display: flex; flex-wrap: wrap; align-items: center; gap: 1.2rem; padding: 1rem; }
+  .pd { font-size: 2.4rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+  .grade { font-size: .8rem; font-weight: 600; padding: .25rem .6rem; border-radius: 999px; color: #fff; }
+  .gauge { flex: 1 1 12rem; height: 7px; background: var(--border); border-radius: 999px; overflow: hidden; min-width: 8rem; }
+  .gauge > div { height: 100%; border-radius: 999px; transition: width .35s ease; }
+  .warn { margin: 0 1rem .7rem; padding: .55rem .75rem; border-radius: 5px;
+          border-left: 3px solid var(--d); background: var(--accent-soft); font-size: .85rem; }
+  .warn.severe { border-left-color: var(--e); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+          gap: .1rem 1rem; padding: .2rem 1rem 1rem; }
+  .grid div { display: flex; justify-content: space-between; gap: .5rem;
+              padding: .25rem 0; border-bottom: 1px dotted var(--border); font-size: .84rem; }
+  .grid .k { color: var(--muted); }
+  .grid .v { font-variant-numeric: tabular-nums; font-weight: 500; }
+  .factors { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.4rem; padding: .2rem 1rem 1rem; }
+  @media (max-width: 700px) { .factors { grid-template-columns: 1fr; } }
+  .factors h3 { font-size: .78rem; color: var(--muted); margin: .6rem 0 .3rem; font-weight: 600; }
+  .factor { display: flex; align-items: center; gap: .5rem; font-size: .83rem; padding: .18rem 0; }
+  .factor .name { flex: 1; }
+  .factor .val { color: var(--muted); font-variant-numeric: tabular-nums; font-size: .78rem; }
+  .factor .weight { width: 3.2rem; text-align: right; font-variant-numeric: tabular-nums; }
+  .factor .tick { width: 3rem; height: 4px; border-radius: 2px; }
+  .empty { padding: 2.5rem 1rem; text-align: center; color: var(--muted); font-size: .9rem; }
+  pre.error { margin: 0; padding: 1rem; font: 12.5px/1.5 ui-monospace, Menlo, monospace;
+              color: var(--e); white-space: pre-wrap; }
+  .simulation { padding: .2rem 1rem 1rem; font-size: .88rem; }
+  .simulation strong { font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">Credit scoring console</h1>
+  <span class="model" id="model">…</span>
+  <span class="lang">
+    <button id="lang-en" aria-pressed="true">EN</button>
+    <button id="lang-fr" aria-pressed="false">FR</button>
+  </span>
+</header>
+
+<main>
+  <nav class="card">
+    <h2 id="h-examples">Example applications</h2>
+    <ul id="list"><li class="empty">…</li></ul>
+  </nav>
+
+  <section>
+    <div class="card">
+      <div class="bar">
+        <button class="action" id="score">Score</button>
+        <button class="action ghost" id="simulate">Simulate</button>
+        <label for="target" id="l-target">Target PD</label>
+        <input type="number" id="target" value="5" min="1" max="50" step="1"> %
+        <span style="flex:1"></span>
+        <button class="action ghost" id="reset">Reset</button>
+      </div>
+      <textarea id="payload" spellcheck="false" aria-label="Application as JSON"></textarea>
+    </div>
+
+    <div class="card result" id="result">
+      <h2 id="h-result">Result</h2>
+      <p class="empty" id="placeholder">Pick an application on the left, then press Score.</p>
+    </div>
+  </section>
+</main>
+
+<script>
+// --------------------------------------------------------------------------
+// Bilingual strings. The credit rationales stored in the database stay French —
+// they are French decision letters — but every label of this console is
+// translated, because the repository is public and read in both languages.
+// --------------------------------------------------------------------------
+const I18N = {
+  en: {
+    title: "Credit scoring console",
+    examples: "Example applications",
+    result: "Result",
+    score: "Score", simulate: "Simulate", reset: "Reset",
+    target: "Target PD",
+    placeholder: "Pick an application on the left, then press Score.",
+    pickPrompt: "Press Score to assess this application.",
+    increases: "What increases the risk",
+    reduces: "What reduces it",
+    unreachable: "service unreachable",
+    badJson: "The application JSON is invalid:\n",
+    grade: (g) => `grade ${g}`,
+    modelLine: (m) => `model <code>${m.name}</code> · ${m.n_variables} variables · ` +
+      `AUC ${m.test_auc} · Gini ${m.test_gini} · fingerprint <code>${m.fingerprint}</code>`,
+    simTitle: (t) => `Simulation — target PD ${t}%`,
+    simNone: (pd) => `Initial PD <strong>${pd}</strong>. No amount brings the PD under ` +
+      `target: the risk lies in the profile, not in the sizing of the operation.`,
+    simCut: (pd, from, to, cut, then) =>
+      `Initial PD <strong>${pd}</strong>. Cutting the amount from <strong>${from} €</strong> ` +
+      `to <strong>${to} €</strong> (−${cut} €) brings the PD down to <strong>${then}</strong>.`,
+    simAlready: (pd) => `Initial PD <strong>${pd}</strong>: the target is already met at ` +
+      `the requested amount.`,
+    labels: {
+      dti_after_pct: "Debt-to-income after loan",
+      dti_before_pct: "Debt-to-income before",
+      residual_income_per_cu: "Residual income / CU",
+      residual_income: "Residual income",
+      weighted_income: "Weighted income",
+      gross_income: "Gross income",
+      counted_expenses: "Counted expenses",
+      monthly_payment: "Monthly payment",
+      existing_payments: "Existing payments",
+      retained_payments: "Retained payments",
+      payment_shock: "Payment shock",
+      savings_months_of_expenses: "Savings (months of expenses)",
+      consumption_units: "Consumption units",
+      variable_income_share: "Variable income share",
+      above_hcsf_threshold: "Above the 35% threshold",
+      formula_version: "Formula version",
+    },
+  },
+  fr: {
+    title: "Console de scoring crédit",
+    examples: "Dossiers d'exemple",
+    result: "Résultat",
+    score: "Scorer", simulate: "Simuler", reset: "Réinitialiser",
+    target: "PD cible",
+    placeholder: "Choisissez un dossier à gauche, puis cliquez sur Scorer.",
+    pickPrompt: "Cliquez sur Scorer pour évaluer ce dossier.",
+    increases: "Ce qui aggrave le risque",
+    reduces: "Ce qui l'atténue",
+    unreachable: "service injoignable",
+    badJson: "Le JSON du dossier est invalide :\n",
+    grade: (g) => `classe ${g}`,
+    modelLine: (m) => `modèle <code>${m.name}</code> · ${m.n_variables} variables · ` +
+      `AUC ${m.test_auc} · Gini ${m.test_gini} · empreinte <code>${m.fingerprint}</code>`,
+    simTitle: (t) => `Simulation — PD cible ${t} %`,
+    simNone: (pd) => `PD initiale <strong>${pd}</strong>. Aucun montant ne ramène la PD ` +
+      `sous la cible : le risque tient au profil, pas au dimensionnement de l'opération.`,
+    simCut: (pd, from, to, cut, then) =>
+      `PD initiale <strong>${pd}</strong>. En ramenant le montant de <strong>${from} €</strong> ` +
+      `à <strong>${to} €</strong> (−${cut} €), la PD descend à <strong>${then}</strong>.`,
+    simAlready: (pd) => `PD initiale <strong>${pd}</strong> : la cible est déjà atteinte ` +
+      `au montant demandé.`,
+    labels: {
+      dti_after_pct: "Taux d'endettement après opération",
+      dti_before_pct: "Taux d'endettement avant",
+      residual_income_per_cu: "Reste à vivre / UC",
+      residual_income: "Reste à vivre",
+      weighted_income: "Revenus pondérés",
+      gross_income: "Revenus bruts",
+      counted_expenses: "Charges retenues",
+      monthly_payment: "Mensualité",
+      existing_payments: "Mensualités avant",
+      retained_payments: "Mensualités conservées",
+      payment_shock: "Saut de charge",
+      savings_months_of_expenses: "Épargne (mois de charges)",
+      consumption_units: "Unités de consommation",
+      variable_income_share: "Part de revenus variables",
+      above_hcsf_threshold: "Dépassement du seuil 35 %",
+      formula_version: "Version des formules",
+    },
+  },
+};
+
+const GRADE_COLOUR = { A: "var(--a)", B: "var(--b)", C: "var(--c)", D: "var(--d)", E: "var(--e)" };
+const $ = (id) => document.getElementById(id);
+
+let lang = (navigator.language || "en").toLowerCase().startsWith("fr") ? "fr" : "en";
+let examples = [];
+let selected = 0;
+let lastScore = null;
+let lastSimulation = null;
+let health = null;
+
+const t = () => I18N[lang];
+const fmt = (v) =>
+  typeof v === "number" ? v.toLocaleString(lang === "fr" ? "fr-FR" : "en-GB",
+    { maximumFractionDigits: 2 }) : v;
+
+async function api(path, body) {
+  const response = await fetch(path, body
+    ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }
+    : undefined);
+  const data = await response.json();
+  if (!response.ok) throw new Error(JSON.stringify(data, null, 2));
+  return data;
+}
+
+function readPayload() {
+  try {
+    return JSON.parse($("payload").value);
+  } catch (e) {
+    throw new Error(t().badJson + e.message);
+  }
+}
+
+function showError(e) {
+  const box = $("result");
+  box.innerHTML = `<h2>${t().result}</h2>`;
+  const pre = document.createElement("pre");
+  pre.className = "error";
+  pre.textContent = e.message;
+  box.append(pre);
+}
+
+function factorRow(f, direction) {
+  const el = document.createElement("div");
+  el.className = "factor";
+  const name = document.createElement("span");
+  name.className = "name";
+  name.textContent = t().labels[f.variable] || f.variable;
+  el.append(name);
+  if (f.value !== null && f.value !== undefined) {
+    const v = document.createElement("span");
+    v.className = "val";
+    v.textContent = fmt(f.value);
+    el.append(v);
+  }
+  const tick = document.createElement("span");
+  tick.className = "tick";
+  tick.style.background = direction === "adverse" ? "var(--e)" : "var(--a)";
+  tick.style.width = Math.max(4, Math.min(100, Math.abs(f.contribution) * 110) * 0.3) + "px";
+  const weight = document.createElement("span");
+  weight.className = "weight";
+  weight.textContent = (f.contribution > 0 ? "+" : "") + f.contribution.toFixed(2);
+  el.append(tick, weight);
+  return el;
+}
+
+function renderResult() {
+  const box = $("result");
+  box.innerHTML = `<h2>${t().result}</h2>`;
+  if (!lastScore) {
+    const p = document.createElement("p");
+    p.className = "empty";
+    p.textContent = examples.length ? t().pickPrompt : t().placeholder;
+    box.append(p);
+    return;
+  }
+  const r = lastScore;
+
+  const head = document.createElement("div");
+  head.className = "result-head";
+  head.innerHTML =
+    `<span class="pd">${(r.probability_of_default * 100).toFixed(2)} %</span>` +
+    `<span class="grade" style="background:${GRADE_COLOUR[r.risk_grade]}">` +
+    `${t().grade(r.risk_grade)}</span>` +
+    `<span class="gauge"><div style="width:${Math.min(100, r.probability_of_default * 100)}%;` +
+    `background:${GRADE_COLOUR[r.risk_grade]}"></div></span>`;
+  box.append(head);
+
+  for (const w of r.warnings) {
+    const el = document.createElement("p");
+    el.className = "warn" + (r.out_of_domain && w.includes("percentile") ? " severe" : "");
+    el.textContent = w;
+    box.append(el);
+  }
+
+  const grid = document.createElement("div");
+  grid.className = "grid";
+  for (const [k, v] of Object.entries(r.indicators)) {
+    const d = document.createElement("div");
+    d.innerHTML = `<span class="k">${t().labels[k] || k}</span><span class="v">${fmt(v)}</span>`;
+    grid.append(d);
+  }
+  box.append(grid);
+
+  const factors = document.createElement("div");
+  factors.className = "factors";
+  const column = (heading, list, direction) => {
+    const d = document.createElement("div");
+    d.innerHTML = `<h3>${heading}</h3>`;
+    if (!list.length) d.innerHTML += '<p class="val">—</p>';
+    list.forEach((f) => d.append(factorRow(f, direction)));
+    return d;
+  };
+  factors.append(column(t().increases, r.adverse_factors, "adverse"));
+  factors.append(column(t().reduces, r.favourable_factors, "favourable"));
+  box.append(factors);
+
+  if (lastSimulation) renderSimulation(lastSimulation);
+}
+
+function renderSimulation(s) {
+  const el = document.createElement("div");
+  el.className = "simulation";
+  el.innerHTML = `<h3 style="font-size:.78rem;color:var(--muted);margin:.6rem 0 .3rem">
+    ${t().simTitle((s.target_pd * 100).toFixed(0))}</h3>`;
+  const p = document.createElement("p");
+  p.style.margin = ".2rem 0";
+  const initial = (s.initial_pd * 100).toFixed(2) + " %";
+  if (s.maximum_amount === null) {
+    p.innerHTML = t().simNone(initial);
+  } else if (s.reduction_required) {
+    p.innerHTML = t().simCut(initial, fmt(s.requested_amount), fmt(s.maximum_amount),
+      fmt(s.reduction_required), (s.pd_at_maximum * 100).toFixed(2) + " %");
+  } else {
+    p.innerHTML = t().simAlready(initial);
+  }
+  el.append(p);
+  $("result").append(el);
+}
+
+function renderChrome() {
+  document.documentElement.lang = lang;
+  $("title").textContent = t().title;
+  $("h-examples").textContent = t().examples;
+  $("score").textContent = t().score;
+  $("simulate").textContent = t().simulate;
+  $("reset").textContent = t().reset;
+  $("l-target").textContent = t().target;
+  $("lang-en").setAttribute("aria-pressed", String(lang === "en"));
+  $("lang-fr").setAttribute("aria-pressed", String(lang === "fr"));
+  $("model").innerHTML = health ? t().modelLine(health.model) : t().unreachable;
+
+  const list = $("list");
+  list.innerHTML = "";
+  examples.forEach((ex, i) => {
+    const li = document.createElement("li");
+    const b = document.createElement("button");
+    b.innerHTML = `${lang === "fr" ? ex.title_fr : ex.title_en}` +
+      `<span class="ref">${ex.reference}</span>`;
+    b.setAttribute("aria-current", String(i === selected));
+    b.onclick = () => select(i);
+    li.append(b);
+    list.append(li);
+  });
+  renderResult();
+}
+
+function select(i) {
+  selected = i;
+  lastScore = lastSimulation = null;
+  $("payload").value = JSON.stringify(examples[i].application, null, 2);
+  renderChrome();
+}
+
+async function score() {
+  $("score").disabled = true;
+  try {
+    lastSimulation = null;
+    lastScore = await api("/score", readPayload());
+    renderResult();
+  } catch (e) {
+    showError(e);
+  } finally {
+    $("score").disabled = false;
+  }
+}
+
+async function simulate() {
+  $("simulate").disabled = true;
+  try {
+    const application = readPayload();
+    const target_pd = Math.max(0.01, Number($("target").value) / 100);
+    lastScore = await api("/score", application);
+    lastSimulation = await api("/simulate", { application, target_pd });
+    renderResult();
+  } catch (e) {
+    showError(e);
+  } finally {
+    $("simulate").disabled = false;
+  }
+}
+
+(async () => {
+  try {
+    health = await api("/health");
+  } catch {
+    health = null;
+  }
+  try {
+    examples = await api("/examples");
+  } catch {
+    examples = [];
+  }
+
+  $("score").onclick = score;
+  $("simulate").onclick = simulate;
+  $("reset").onclick = () => select(selected);
+  $("lang-en").onclick = () => { lang = "en"; renderChrome(); };
+  $("lang-fr").onclick = () => { lang = "fr"; renderChrome(); };
+
+  if (examples.length) select(0);
+  else renderChrome();
+})();
+</script>
+</body>
+</html>

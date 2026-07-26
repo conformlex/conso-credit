@@ -1,0 +1,9 @@
+# Regenerable artefacts — not versioned
+credit.db
+export/
+models/
+rationales/
+examples/
+__pycache__/
+*.pyc
+.venv/
