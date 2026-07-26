@@ -514,14 +514,14 @@ def _decide(ind, behaviour, employment, application, reasons, risk, rng) -> dict
             lines = []
             if ind.dti_after_pct > HCSF_THRESHOLD_PCT and rng.random() < 0.7:
                 amount = round(amount * rng.uniform(0.55, 0.85), 2)
-                lines.append(f"montant ramene a {amount:.0f} EUR")
+                lines.append(f"montant ramené à {amount:.0f} EUR")
             if rng.random() < 0.35:
                 term = max(6, int(term * rng.uniform(0.75, 1.0)))
-                lines.append(f"duree ramenee a {term} mois")
+                lines.append(f"durée ramenée à {term} mois")
             if not application["insurance_taken"] and rng.random() < 0.5:
-                lines.append("souscription de l'assurance emprunteur exigee")
+                lines.append("souscription de l'assurance emprunteur exigée")
             if not lines:
-                lines.append("justificatifs de revenus complementaires exiges avant deblocage")
+                lines.append("justificatifs de revenus complémentaires exigés avant déblocage")
             conditions = " ; ".join(lines)
 
     final_reasons = list(reasons)

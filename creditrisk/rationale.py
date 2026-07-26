@@ -11,6 +11,11 @@ Two paths coexist, distinguished by `decision.decided_by`:
 **The rationale text itself is French**, because the artefact is a French credit
 decision letter. Only the code around it is English. Three writer personas rotate
 so that a thousand rationales do not read identically.
+
+The text is accented French, and that is a data-quality requirement rather than a
+typographic preference: this corpus is supervision material, so a model trained
+on unaccented clauses would learn to write unaccented French. Amounts carry the
+`EUR` code rather than the symbol, which is what a decision letter does.
 """
 
 from __future__ import annotations
@@ -19,37 +24,37 @@ import random
 
 # Reason code -> French clause. The placeholders are filled from the file.
 CLAUSES = {
-    "EXCESSIVE_DTI": "le taux d'endettement apres operation atteint {dti:.1f} %, au-dela du seuil de 35 %",
-    "COMFORTABLE_DTI": "le taux d'endettement apres operation reste contenu a {dti:.1f} %",
-    "LOW_RESIDUAL_INCOME": "le reste a vivre s'etablit a {residual:.0f} EUR par unite de consommation, insuffisant pour le foyer",
-    "AMPLE_RESIDUAL_INCOME": "le reste a vivre atteint {residual:.0f} EUR par unite de consommation",
+    "EXCESSIVE_DTI": "le taux d'endettement après opération atteint {dti:.1f} %, au-delà du seuil de 35 %",
+    "COMFORTABLE_DTI": "le taux d'endettement après opération reste contenu à {dti:.1f} %",
+    "LOW_RESIDUAL_INCOME": "le reste à vivre s'établit à {residual:.0f} EUR par unité de consommation, insuffisant pour le foyer",
+    "AMPLE_RESIDUAL_INCOME": "le reste à vivre atteint {residual:.0f} EUR par unité de consommation",
     "HIGH_PAYMENT_SHOCK": "le saut de charge de {shock:.0f} EUR par mois est important au regard des revenus",
-    "INSUFFICIENT_INCOME": "les revenus ne supportent pas le montant sollicite",
-    "TOO_MUCH_VARIABLE_PAY": "la part variable des revenus est elevee et fragilise la capacite de remboursement",
-    "UNDOCUMENTED_INCOME": "une partie des revenus declares n'est pas justifiee",
-    "SOLID_INCOME": "les revenus sont stables et integralement justifies",
-    "PRECARIOUS_CONTRACT": "le contrat de travail est precaire",
-    "PROBATION_PERIOD": "l'emprunteur est en periode d'essai",
-    "SHORT_JOB_TENURE": "l'anciennete professionnelle est faible ({tenure} mois)",
-    "RECENT_MOVE": "l'installation dans le logement est tres recente",
-    "STABLE_EMPLOYMENT": "la situation professionnelle est stable ({contract}, {tenure} mois d'anciennete)",
-    "PAYMENT_INCIDENTS": "des incidents de paiement ont ete releves sur les douze derniers mois",
-    "HEAVY_OVERDRAFT_USE": "le compte est reste debiteur {days} jours sur l'annee",
-    "LOAN_INCIDENTS": "des incidents ont ete constates sur les credits en cours",
-    "MULTIPLE_REVOLVING": "la detention de plusieurs credits renouvelables traduit une tension de tresorerie",
-    "SOLID_SAVINGS": "l'epargne disponible represente {savings:.1f} mois de charges",
-    "CLEAN_HISTORY": "aucun incident n'est a signaler sur la periode observee",
-    "LONG_RELATIONSHIP": "la relation bancaire remonte a plus de {years} ans",
-    "SALARY_DOMICILED": "les revenus sont domicilies dans l'etablissement",
-    "LOANS_REPAID_CLEAN": "les credits precedents ont ete soldes sans incident",
-    "SOLID_CO_BORROWER": "la presence d'un co-emprunteur renforce le dossier",
-    "MEANINGFUL_DOWN_PAYMENT": "l'apport personnel de {down:.0f} EUR reduit l'exposition",
-    "NO_SECURITY": "l'operation ne s'accompagne d'aucun apport ni garantie",
+    "INSUFFICIENT_INCOME": "les revenus ne supportent pas le montant sollicité",
+    "TOO_MUCH_VARIABLE_PAY": "la part variable des revenus est élevée et fragilise la capacité de remboursement",
+    "UNDOCUMENTED_INCOME": "une partie des revenus déclarés n'est pas justifiée",
+    "SOLID_INCOME": "les revenus sont stables et intégralement justifiés",
+    "PRECARIOUS_CONTRACT": "le contrat de travail est précaire",
+    "PROBATION_PERIOD": "l'emprunteur est en période d'essai",
+    "SHORT_JOB_TENURE": "l'ancienneté professionnelle est faible ({tenure} mois)",
+    "RECENT_MOVE": "l'installation dans le logement est très récente",
+    "STABLE_EMPLOYMENT": "la situation professionnelle est stable ({contract}, {tenure} mois d'ancienneté)",
+    "PAYMENT_INCIDENTS": "des incidents de paiement ont été relevés sur les douze derniers mois",
+    "HEAVY_OVERDRAFT_USE": "le compte est resté débiteur {days} jours sur l'année",
+    "LOAN_INCIDENTS": "des incidents ont été constatés sur les crédits en cours",
+    "MULTIPLE_REVOLVING": "la détention de plusieurs crédits renouvelables traduit une tension de trésorerie",
+    "SOLID_SAVINGS": "l'épargne disponible représente {savings:.1f} mois de charges",
+    "CLEAN_HISTORY": "aucun incident n'est à signaler sur la période observée",
+    "LONG_RELATIONSHIP": "la relation bancaire remonte à plus de {years} ans",
+    "SALARY_DOMICILED": "les revenus sont domiciliés dans l'établissement",
+    "LOANS_REPAID_CLEAN": "les crédits précédents ont été soldés sans incident",
+    "SOLID_CO_BORROWER": "la présence d'un co-emprunteur renforce le dossier",
+    "MEANINGFUL_DOWN_PAYMENT": "l'apport personnel de {down:.0f} EUR réduit l'exposition",
+    "NO_SECURITY": "l'opération ne s'accompagne d'aucun apport ni garantie",
     "FICP_FLAG": "l'emprunteur est inscrit au FICP",
     "FCC_FLAG": "l'emprunteur est inscrit au FCC",
-    "OVERRIDE_WEALTH": "le patrimoine constitue justifie une derogation",
-    "OVERRIDE_RELATIONSHIP": "l'anciennete de la relation justifie une derogation",
-    "OVERRIDE_COMMERCIAL": "une derogation commerciale a ete accordee",
+    "OVERRIDE_WEALTH": "le patrimoine constitué justifie une dérogation",
+    "OVERRIDE_RELATIONSHIP": "l'ancienneté de la relation justifie une dérogation",
+    "OVERRIDE_COMMERCIAL": "une dérogation commerciale a été accordée",
 }
 
 FAVOURABLE = {
@@ -61,29 +66,29 @@ FAVOURABLE = {
 
 OPENINGS = {
     "underwriter": {
-        "approved": "Dossier accorde.",
+        "approved": "Dossier accordé.",
         "approved_with_conditions": "Accord assorti de conditions.",
-        "declined": "Demande rejetee.",
-        "deferred": "Decision ajournee dans l'attente de pieces complementaires.",
+        "declined": "Demande rejetée.",
+        "deferred": "Décision ajournée dans l'attente de pièces complémentaires.",
     },
     "adviser": {
-        "approved": "Nous donnons une suite favorable a cette demande de {purpose}.",
-        "approved_with_conditions": "Nous pouvons accompagner ce projet de {purpose}, sous reserve d'amenagements.",
-        "declined": "Nous ne pouvons pas donner suite a cette demande de {purpose}.",
+        "approved": "Nous donnons une suite favorable à cette demande de {purpose}.",
+        "approved_with_conditions": "Nous pouvons accompagner ce projet de {purpose}, sous réserve d'aménagements.",
+        "declined": "Nous ne pouvons pas donner suite à cette demande de {purpose}.",
         "deferred": "L'instruction de cette demande de {purpose} est suspendue.",
     },
     "committee": {
-        "approved": "Le comite retient une position favorable.",
-        "approved_with_conditions": "Le comite retient un accord conditionne.",
-        "declined": "Le comite retient une position defavorable.",
-        "deferred": "Le comite ajourne sa decision.",
+        "approved": "Le comité retient une position favorable.",
+        "approved_with_conditions": "Le comité retient un accord conditionné.",
+        "declined": "Le comité retient une position défavorable.",
+        "deferred": "Le comité ajourne sa décision.",
     },
 }
 
 PURPOSE_FR = {
-    "AUTO": "credit auto", "HOME_IMPROVEMENT": "credit travaux",
-    "PERSONAL_LOAN": "pret personnel", "REVOLVING": "reserve d'argent",
-    "DEBT_CONSOLIDATION": "regroupement de credits",
+    "AUTO": "crédit auto", "HOME_IMPROVEMENT": "crédit travaux",
+    "PERSONAL_LOAN": "prêt personnel", "REVOLVING": "réserve d'argent",
+    "DEBT_CONSOLIDATION": "regroupement de crédits",
     "LEASE_TO_OWN": "location avec option d'achat",
 }
 
@@ -128,25 +133,25 @@ def write(app: dict, rng: random.Random) -> str:
         parts.append(f"En effet, {body}." if persona == "adviser"
                      else f"{body[0].upper()}{body[1:]}.")
     if trailing:
-        link = rng.choice(["Le dossier presente toutefois un point d'appui",
-                           "A l'inverse", "Il faut noter en sens inverse"]) \
+        link = rng.choice(["Le dossier présente toutefois un point d'appui",
+                           "À l'inverse", "Il faut noter en sens inverse"]) \
             if negative_outcome else \
-            rng.choice(["Le dossier appelle en revanche une reserve",
-                        "Un point de vigilance subsiste", "Une reserve demeure"])
+            rng.choice(["Le dossier appelle en revanche une réserve",
+                        "Un point de vigilance subsiste", "Une réserve demeure"])
         body = " ; ".join(CLAUSES[c].format(**ctx) for c in trailing)
         parts.append(f"{link} : {body}.")
 
     if decision["result"] == "approved_with_conditions" and decision["conditions"]:
-        parts.append(f"L'accord est conditionne : {decision['conditions']}.")
+        parts.append(f"L'accord est conditionné : {decision['conditions']}.")
     elif decision["result"] == "approved":
         parts.append(
-            f"Le financement est accorde a hauteur de {decision['approved_amount']:.0f} EUR "
+            f"Le financement est accordé à hauteur de {decision['approved_amount']:.0f} EUR "
             f"sur {decision['approved_term_months']} mois.")
     elif decision["result"] == "declined":
         parts.append(rng.choice([
-            "Une demande portant sur un montant inferieur pourrait etre reexaminee.",
-            "Le dossier pourra etre represente apres consolidation de la situation.",
-            "Aucune contre-proposition n'est envisageable en l'etat.",
+            "Une demande portant sur un montant inférieur pourrait être réexaminée.",
+            "Le dossier pourra être représenté après consolidation de la situation.",
+            "Aucune contre-proposition n'est envisageable en l'état.",
         ]))
 
     return " ".join(parts)
